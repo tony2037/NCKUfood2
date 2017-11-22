@@ -1,0 +1,23 @@
+{
+  "name": "nckufood2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tony2037/NCKUfood2.0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tony2037/NCKUfood2.0/issues"
+  },
+  "homepage": "https://github.com/tony2037/NCKUfood2.0#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
