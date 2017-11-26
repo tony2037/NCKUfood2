@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+<<<<<<< HEAD
 const connection = mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
 var db = mongoose.connection;
 
@@ -39,3 +40,13 @@ function Subscribe(User_ID= "",subscribe){
     else{}
 }
 
+=======
+mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
+var db_connection = mongoose.connection;
+    // if not connected
+db_connection.on('error', console.error.bind(console, 'connection error:'));
+db_connection.once('open', function() {
+    // if connected
+    var MyModel = mongoose.model('Test', new mongoose.Schema({ name: String }));
+});
+>>>>>>> 0c0c48e46482a36240c3523d2487a4ed1dc45c27
