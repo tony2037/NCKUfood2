@@ -3,7 +3,7 @@ const app = express();
 const port = 17487;
 const bodyParser = require("body-parser");
 
-
+var fb = require('./fb');  
 app.get('/', function (req, res) {
   if (req.query['hub.verify_token'] === '<validation_token>') {
       res.send(req.query['hub.challenge']);
@@ -23,6 +23,7 @@ app.post('/', function (req, res) {
                 if (event.message && event.message.text) {
                       text = event.message.text;
                             // Handle a text message from this sender
+                      fb.handleMessage(sender,text);// send messeage >"<
 
                                 }
                                   }
