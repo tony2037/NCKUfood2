@@ -1,21 +1,24 @@
 var mongoose = require('mongoose');
-<<<<<<< HEAD
-const connection = mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', ()=>{
-    console.log("We're connected!");
-});
-var Schema = mongoose.Schema;
-var UsersSchema = new Schema({
-    id: String,
-    channel_free:{subscribe: Boolean,po:Number,},
-    channel_pay: [{name:String, po: Number, subscribe: Boolean}]
-});
 
 
-var Users = mongoose.model("Users",UsersSchema);
+    
+  const connection = mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
+  var db = mongoose.connection;
+
+  db.on('error', console.error.bind(console, 'connection error'));
+  db.once('open', ()=>{
+      console.log("We're connected!");
+  });
+  var Schema = mongoose.Schema;
+  var UsersSchema = new Schema({
+      id: String,
+      channel_free:{subscribe: Boolean,po:Number,},
+      channel_pay: [{name:String, po: Number, subscribe: Boolean}]
+  });
+
+
+  var Users = mongoose.model("Users",UsersSchema);
+
 
 function Create_collection_Users(){
     Users.create({category: 1, title: "Users"},(err, doc)=>{
@@ -24,7 +27,7 @@ function Create_collection_Users(){
 }
 
 function Subscribe(User_ID= "",subscribe){
-    if(User_ID == "")console.loge("id error");
+    if(User_ID == "")console.log("id error");
 
     //check if subscribed
 
@@ -40,3 +43,5 @@ function Subscribe(User_ID= "",subscribe){
     else{}
 }
 
+var ex = { Create_collection_Users: Create_collection_Users(), Subscribe:Subscribe()};
+module.export = {ex};
