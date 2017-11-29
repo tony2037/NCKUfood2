@@ -1,7 +1,5 @@
 //modules/Users/Users.model.js
 
-
-
 const mongoose = require('mongoose'),   
 
 Schema = mongoose.Schema;  
