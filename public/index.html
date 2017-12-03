@@ -5,9 +5,6 @@
   <title>Messenger</title>
   
   
-      <link rel="stylesheet" href="facebook.css">
-
-  
 </head>
 
 <body>
@@ -28,6 +25,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     var psid;
+    var strUrl = location.search;
+    var getPara, ParaVal;
+    var aryPara = [];
+    if (strUrl.indexOf("?") != -1) {
+      var getSearch = strUrl.split("?");
+          getPara = getSearch[1].split("&");
+      for (i = 0; i < getPara.length; i++) {
+          ParaVal = getPara[i].split("=");
+          aryPara.push(ParaVal[0]);
+          aryPara[ParaVal[0]] = ParaVal[1];
+      }
+      alert("psid:"+aryPara.psid);
+      psid = aryPara.psid;
+                                 }
+
+/*    
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {
@@ -39,25 +52,30 @@
        fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'Messenger'));
 
-     window.extAsyncInit = function() {
-        MessengerExtensions.getUserID(function success(uids) {
-        psid = uids.psid;
-        }, function error(err) {
-         alert("failed");
+    window.extAsyncInit = function() {
+   
+        MessengerExtensions.getContext('1450063895107562', function success(result){
+          psid  = result.psid;
+          alert("Success: "+result.psid);
+        },function error(result){
+          alert("error!");
         });
-    };
+   };
+    
     function closeView(){
-      MessengerExtensions.requestCloseBrowser(function success() {
-      console.log(success)
-      }, function error(err) {
-      console.log(err)
-      });
-    }
+       MessengerExtensions.requestCloseBrowser(function success() {
+       console.log(success)
+       }, function error(err) {
+       console.log(err)
+       });
+     }
+  */  
     $('#btn').on('click',(e)=>{
       e.preventDefault();
       console.log("dd");
       $.ajax({
-        method :"POST",
+        url : "../ncku",
+        method :"GET",
         data : {
           id: psid ,
           food_name:$("input[name=food_name]").val(),
@@ -66,7 +84,7 @@
           location:$("input[name=location]").val()
         },
         dataType:'json',
-        url : "web.php",
+
         success :(data)=>{
           $('#info').text("food name:" + data.food_name +" food number:" + data.food_number + " deadline:" + data.deadline + " location:" + data.location);
           $('#psid').text(data.id);
@@ -76,7 +94,7 @@
         }
       });
 
-    })
+    });
 
 </script>
 

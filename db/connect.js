@@ -4,7 +4,7 @@
 //db.start()
 const mongoose = require('mongoose');
 
-export.start = (success) => {
+exports.start = (success) => {
     mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
     const db = mongoose.connection;
     db.on('error',console.error.bind(console, 'connection error:'));

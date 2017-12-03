@@ -36,7 +36,7 @@ var fb ={
                 
                 {
                   "type":"web_url",
-                  "url":"https://luffy.ee.ncku.edu.tw:17487/about/",
+                  "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/web.html?psid=" + sender_psid ,
                   "title":"店家投石",
                   "webview_height_ratio": "full",
                   "messenger_extensions": true,
