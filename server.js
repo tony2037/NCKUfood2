@@ -10,7 +10,7 @@ const
 var fb = require('./fb');
 var func = require('./modules/Users/function.js')
 var FBMessenger = require('fb-messenger')
-var messenger = new FBMessenger("EAAUm009elZBoBABmWMK1kZBCjudub4ktE4HZAdPeIYmqlhx0suSQDEjZAkrUGLMhfMjuwhWQgTUfnVmcpSHuIe5Ocnh6zM8bt39UIwes7hybzVhxiTpTt1j6cVNa4OKZAhZBPX3v7Saa9ZARnTUI6aKHndjIU0gsjY0Wnn3aZBMrwF0kvF0ov0eK")
+var messenger = new FBMessenger(fb.page_token)
 
 
 var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
@@ -29,6 +29,7 @@ https.createServer(credentials, app).listen(17487, function () {
 
 app.get('/ncku',(req,res)=>{
   var id = req.body.id;
+  func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   messenger.sendTextMessage('1493495980699051', 'Hello')
   console.log(req.query);
 });
@@ -38,7 +39,6 @@ app.get('/about',function(req,res){
   });
 
 app.post('/webhook',(req, res)=>{
-  //func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   console.log("get post");
   let body = req.body;
   if(body.object === 'page'){
