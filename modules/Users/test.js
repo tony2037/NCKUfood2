@@ -19,17 +19,26 @@ var no_client = [0.5,0.5,0.5,0.5,0.5];
 var nan_client = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
 
 //test for selected_people
-for(var index = 0;index<1000;index++){
+/*
+for(var index = 0;index<1;index++){
     var recieve = func.selected_people(10, 2, pseudo_id, pseudo_probability);
     for (var i in recieve) {
         report[recieve[i]] ++;  
     }
 }
-
-func.update_probability(yes, no, nan, 0.1, 0.1, 0.2);
+*/
+var recieve = func.selected_people(10, 2, pseudo_id, pseudo_probability);
+var obj = {
+    id: recieve
+ };
+var json = JSON.stringify(obj);
+var fs = require('fs');
+fs.writeFile('log.json', json, 'utf8');
+//func.update_probability(yes, no, nan, 0.1, 0.1, 0.2);
+yes = func.decrement_probability(yes,0.1);
 console.log(yes.po);
-console.log(no.po);
-console.log(nan.po);
+//console.log(no.po);
+//console.log(nan.po);
 
 //console.log(report);
 

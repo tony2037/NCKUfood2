@@ -23,6 +23,7 @@ var func = {
                 }
             }
         }
+
         return target_id_arr;
     },
 
@@ -42,6 +43,32 @@ var func = {
         for(index = 0 ; index<c.length ; index++){
             c[index] -= decrement;
         } 
+    },
+
+    increment_probability : function(client_array, increment){
+        //client_array is a object array consists of probabilties (float) and ids (string) 
+        //increment / decrement is a floating number for probability
+        //mostly the same as above, but instead return an array of obj.
+        var index;
+        for(index = 0 ; index<client_array.po.length ; index++){
+            client_array.po[index] += increment;
+        }
+        return client_array;
+    },
+
+    decrement_probability : function(client_array, decrement){
+        //client_array is a object array consists of probabilties (float) and ids (string) 
+        //increment / decrement is a floating number for probability
+        //mostly the same as above, but instead return an array of obj.
+        var index;
+        for(index = 0 ; index<client_array.po.length ; index++){
+            client_array.po[index] -= decrement;
+        }
+        return client_array;
+    },    
+
+    set_rewinder : function(await_time, candidate_total){
+        
     }
 }
 module.exports = func;
