@@ -23,3 +23,12 @@ exports.addUsers = (body)=>{
         }
     });
 }
+
+exports.random_free_Users = ()=>{
+    return Users.find({}, function(err, Users) {
+        if (err) throw err;
+      
+        // object of all the users
+        console.log(Users);
+      });
+}
