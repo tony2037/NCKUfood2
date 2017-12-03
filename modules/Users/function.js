@@ -29,9 +29,19 @@ var func = {
     update_probability : function(agree_client_array, decline_client_array, noresponce_client_array, increment, decrement){
         //client_array is a object array consists of probabilties (float) and ids (string) 
         //increment / decrement is a floating number for probability
-        agree_client_array.forEach(element => {
-            element.
-        });
+        var index;
+        var a = agree_client_array.po;
+        for(index = 0 ; index<a.length ; index++){
+            a[index] += increment;
+        } 
+        var b = decline_client_array.po;
+        for(index = 0 ; index<b.length ; index++){
+            b[index] += increment;
+        }   
+        var c = noresponce_client_array.po;
+        for(index = 0 ; index<c.length ; index++){
+            c[index] -= decrement;
+        } 
     }
 }
 module.exports = func;

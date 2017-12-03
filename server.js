@@ -1,12 +1,37 @@
 'use strict';
 const
+  
+  https = require('https'),
+  fs = require('fs'),
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json());
-  app.listen(process.env.PORT || 17487,()=>console.log('app is running on port 17487!'));
+ // app.listen(process.env.PORT || 17487,()=>console.log('app is running on port 17487!'));
 var fb = require('./fb');
 
 
+var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
+var certificate = fs.readFileSync(__dirname + '/ssl/certificate.crt');
+var ca = fs.readFileSync(__dirname + '/ssl/ca_bundle.crt');
+var credentials = { key: privateKey, cert: certificate, ca: ca };
+const db = require('./db/connect');
+db.start();
+
+
+
+
+https.createServer(credentials, app).listen(17487, function () {
+    console.log('Https server listening on port ' + 17487);
+    });
+
+app.get('/ncku',(req,res)=>{
+  var id = req.body.id;
+  console.log(req.query);
+});
+
+app.get('/about',function(req,res){
+  res.sendFile(__dirname + '/public/index.html');
+  });
 
 app.post('/webhook',(req, res)=>{
   console.log("get post");

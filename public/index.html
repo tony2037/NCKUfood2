@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Messenger</title>
+  
+  
+</head>
+
+<body>
+
+<div class="msg">
+    <h1 id="psid">your psid number<h1>
+    <h1 id="info">information here</h1>
+    <form class="toss_food">
+      <br>Food name:<input type='text' name='food_name' placeholder="Enter food name">
+      <br>Food number:<input type='text' name='food_number' placeholder="Enter food number">
+      <br>Deadline:<input type='text' name='deadline' placeholder="Enter deadline">
+      <br>location:<input type='text' name='location' placeholder="Enter location">
+      <br><button id="btn" type="submit" >Submit</button>
+
+    </form>
+    <a id="samplelink" href="#" class="btn btn-info" role="button" onclick="closeView()">Close ME</a>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var psid;
+    var strUrl = location.search;
+    var getPara, ParaVal;
+    var aryPara = [];
+    if (strUrl.indexOf("?") != -1) {
+      var getSearch = strUrl.split("?");
+          getPara = getSearch[1].split("&");
+      for (i = 0; i < getPara.length; i++) {
+          ParaVal = getPara[i].split("=");
+          aryPara.push(ParaVal[0]);
+          aryPara[ParaVal[0]] = ParaVal[1];
+      }
+      alert("psid:"+aryPara.psid);
+      psid = aryPara.psid;
+                                 }
+
+/*    
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;            
+            }
+       js = d.createElement(s);
+       js.id = id;
+       js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+       fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+
+    window.extAsyncInit = function() {
+   
+        MessengerExtensions.getContext('1450063895107562', function success(result){
+          psid  = result.psid;
+          alert("Success: "+result.psid);
+        },function error(result){
+          alert("error!");
+        });
+   };
+    
+    function closeView(){
+       MessengerExtensions.requestCloseBrowser(function success() {
+       console.log(success)
+       }, function error(err) {
+       console.log(err)
+       });
+     }
+  */  
+    $('#btn').on('click',(e)=>{
+      e.preventDefault();
+      console.log("dd");
+      $.ajax({
+        url : "../ncku",
+        method :"GET",
+        data : {
+          id: psid ,
+          food_name:$("input[name=food_name]").val(),
+          food_number:$("input[name=food_number]").val(),
+          deadline:$("input[name=deadline]").val(),
+          location:$("input[name=location]").val()
+        },
+        dataType:'json',
+
+        success :(data)=>{
+          $('#info').text("food name:" + data.food_name +" food number:" + data.food_number + " deadline:" + data.deadline + " location:" + data.location);
+          $('#psid').text(data.id);
+        },
+        error : ()=>{
+          $('#info').text("error!");
+        }
+      });
+
+    });
+
+</script>
+
+</body>
+</html>
