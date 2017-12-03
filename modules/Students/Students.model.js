@@ -14,3 +14,23 @@ var StudentsSchema = new Schema({
 
 
 var Students = mongoose.model("Students",StudentsSchema);
+
+exports.addStudents = (body)=>{
+    var StudentsEntity = new Students(body);
+    StudentsEntity.save(function(error,doc) {
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(doc);
+        }
+    });
+}
+
+exports.list_Students = ()=>{
+    return Students.find({}, function(err, Students) {
+        if (err) throw err;
+      
+        // object of all the users
+        console.log(Students);
+      });
+}
