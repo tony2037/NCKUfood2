@@ -15,6 +15,11 @@ var Users = mongoose.model("Users",UsersSchema);
 
 exports.addUsers = (body)=>{
     var UsersEntity = new Users(body);
-    UsersEntity.save();
-
+    UsersEntity.save(function(error,doc) {
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(doc);
+        }
+    });
 }
