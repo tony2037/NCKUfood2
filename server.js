@@ -8,6 +8,7 @@ const
   app = express().use(bodyParser.json());
  // app.listen(process.env.PORT || 17487,()=>console.log('app is running on port 17487!'));
 var fb = require('./fb');
+var func = require('./Users/function.js')
 
 
 var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
@@ -26,6 +27,7 @@ https.createServer(credentials, app).listen(17487, function () {
 
 app.get('/ncku',(req,res)=>{
   var id = req.body.id;
+  fb.handleMessage('1493495980699051', webhook_event.message);
   console.log(req.query);
 });
 
@@ -34,6 +36,7 @@ app.get('/about',function(req,res){
   });
 
 app.post('/webhook',(req, res)=>{
+  func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   console.log("get post");
   let body = req.body;
   if(body.object === 'page'){
