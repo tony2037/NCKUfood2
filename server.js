@@ -29,6 +29,7 @@ https.createServer(credentials, app).listen(17487, function () {
 
 var food;//暫時的  發完食物
 app.get('/nckufood_student',(req,res)=>{
+  res.end('{"status":"success"}');
   var ajaxdata = req.query;
   var food_num = 1;
   var multi_rate = 2;
@@ -112,6 +113,9 @@ app.get('/css/style.css', function(req, res) {
   });
 app.get('/css/mobile-style.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/mobile-style.css");
+  });
+app.get('/css/loading-spin.svg', function(req, res) {
+  res.sendFile(__dirname + "/public/css/loading-spin.svg");
   });
 /*--webpage--*/
 

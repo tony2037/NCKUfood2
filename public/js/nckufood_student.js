@@ -2,10 +2,11 @@ var wahaha;
 var feedback = function(res) {
      if (res.success === true) {
          wahaha = res.data.link.replace("http","http");
-       // document.querySelector('.status').classList.add('bg-success');
+        document.querySelector('.status').classList.add('bg-success');
         //document.querySelector('.status').innerHTML = 
         //'Image : ' + '<br><input class="image-url" value=' + wahaha + '/>' + //'<img class="img" src=' + wahaha + '/>';
-     }
+        $('.dropzone').find("p").text("照片上傳成功！");
+    }
     
  };
 
@@ -18,6 +19,7 @@ new Imgur({
 
 
 var psid;
+    $('#info').hide();
     var strUrl = location.search;
     var getPara, ParaVal;
     var aryPara = [];
@@ -29,7 +31,7 @@ var psid;
           aryPara.push(ParaVal[0]);
           aryPara[ParaVal[0]] = ParaVal[1];
       }
-      alert("psid:"+aryPara.psid);
+     // alert("psid:"+aryPara.psid);
       psid = aryPara.psid;
     }
     
@@ -51,11 +53,10 @@ var psid;
         dataType:'json',
 
         success :(data)=>{
-          $('#info').show();
+          $('#info').toggle();
         },
-        error : ()=>{
-            alert("error");
-        }
+        error:()=>{
+         }
       });
 
     });
