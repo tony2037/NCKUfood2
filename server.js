@@ -27,13 +27,14 @@ https.createServer(credentials, app).listen(17487, function () {
     console.log('Https server listening on port ' + 17487);
     });
 
-app.get('/ncku',(req,res)=>{
+var food;//暫時的  發完食物
+app.get('/nckufood_student',(req,res)=>{
   var ajaxdata = req.query;
   var food_num = 1;
   var multi_rate = 2;
   var ori_candidate_people = ["1493495980699051","1522796911138184"];
   var candidate_probability = [0.5,0.5];
-
+ 
   var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   var myloveobj = {
       id: ajaxdata.id,
@@ -41,7 +42,7 @@ app.get('/ncku',(req,res)=>{
    };
   var json = JSON.stringify(myloveobj);
   fs.writeFile('log.json', json, 'utf8');
-
+  food = ajaxdata.food_name;//暫時的 發完食物
   var sendfood ={
         "attachment":{
           "type": "template",
@@ -49,7 +50,7 @@ app.get('/ncku',(req,res)=>{
             "template_type": "generic",
             "elements":[{
               "title":"【食物快遞】現在有人贈送免費的" + ajaxdata.food_name + "是否去拿?",
-              "subtitle":"食物數量:"+ ajaxdata.food_number + "\n地址:"+ ajaxdata.location + "\n請在" + ajaxdata.deadline +"小時來拿",
+              "subtitle":"食物數量:"+ ajaxdata.food_number + "\n地址:"+ ajaxdata.location + "\n請在" + ajaxdata.deadline +"前小時來拿",
               "image_url": ajaxdata.image_url,
               "buttons":[
                 {
@@ -67,17 +68,29 @@ app.get('/ncku',(req,res)=>{
           }
         }
       }  
+  var tossfooder ={
+        "attachment":{
+          "type": "template",
+          "payload":{
+            "template_type": "button",
+            "text":"如果食物順利發完，或者不想發了，請記得按【發完了】，謝謝！",
+            "buttons":[
+                {
+                  "type":"postback",
+                  "title":"發完了",
+                  "payload": "empty",
+                }
+              ],
+          }
+        }
+      }  
   for(var i=0;i < myloveobj.selectedPeople.length;i++){
     fb.handleMessage(myloveobj.selectedPeople[i],"",sendfood);
   console.log("發食物給"+ myloveobj.selectedPeople[i]+"囉");
      // messenger.sendTextMessage(myloveobj.selectedPeople[i], '沒了');
  }
-  messenger.sendButtonsMessage(myloveobj.id, "如果沒了給我按",
-                {
-                  "type":"postback",
-                  "title":"沒了拉!",
-                  "payload": "empty",
-                });
+  
+    fb.handleMessage(myloveobj.id,"",tossfooder);
   console.log(req.query);
 });
 /*--webpage--*/
@@ -91,8 +104,8 @@ app.get('/css/nckufood_student.css', function(req, res) {
 app.get('/js/imgur.js', function(req, res) {
   res.sendFile(__dirname + "/public/js/imgur.js");
   });
-app.get('/js/upload.js', function(req, res) {
-  res.sendFile(__dirname + "/public/js/upload.js");
+app.get('/js/nckufood_student.js', function(req, res) {
+  res.sendFile(__dirname + "/public/js/nckufood_student.js");
   });
 app.get('/css/style.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/style.css");
@@ -100,7 +113,7 @@ app.get('/css/style.css', function(req, res) {
 app.get('/css/mobile-style.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/mobile-style.css");
   });
-
+/*--webpage--*/
 
 
 app.post('/webhook',(req, res)=>{
@@ -113,8 +126,9 @@ app.post('/webhook',(req, res)=>{
     // console.log(webhook_event);
      console.log('sender psid:'+ sender_psid );
     if(webhook_event.postback && webhook_event.postback.payload === "empty"){    
-      messenger.sendTextMessage('1493495980699051', '沒了');
-      messenger.sendTextMessage('1522796911138184', '沒了');
+     //這邊之後讀JSON檔??
+      messenger.sendTextMessage('1493495980699051', food + '已經發完了唷');
+      messenger.sendTextMessage('1522796911138184', food + '已經發完了唷');
     
     }
      else  if(webhook_event.message){

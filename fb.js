@@ -56,9 +56,9 @@ var fb ={
           let payload = received_postback.payload;
               if (payload === 'yes') {
                   response = { "text": "那記得快去拿唷~~" }
-              } else if (payload === 'no') {
-                  response = { "text": "讚齁" }
-              }else if(payload === 'feedme'){
+              } else if (payload === 'empty') {
+                  response = { "text": "" }
+              }else if(payload === 'no'){
                   response = {"text":"好，沒關係!把機會讓給其他人"}
               }
   fb.callSendAPI(sender_psid, response);
