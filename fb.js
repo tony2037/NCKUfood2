@@ -2,9 +2,9 @@
 var request = require("request");
 var fb ={
   page_token:"EAAUm009elZBoBABmWMK1kZBCjudub4ktE4HZAdPeIYmqlhx0suSQDEjZAkrUGLMhfMjuwhWQgTUfnVmcpSHuIe5Ocnh6zM8bt39UIwes7hybzVhxiTpTt1j6cVNa4OKZAhZBPX3v7Saa9ZARnTUI6aKHndjIU0gsjY0Wnn3aZBMrwF0kvF0ov0eK",
-  handleMessage:function(sender_psid, received_message){
+  handleMessage:function(sender_psid, received_message,other_response){
     let response;
-    if(received_message.text){
+    if(received_message.text && !other_response){
       response ={
         "attachment":{
           "type": "template",
@@ -15,11 +15,6 @@ var fb ={
               "subtitle":"選阿給我選",
               "image_url": "https://cdn2.ettoday.net/images/2709/2709688.jpg",
               "buttons":[
-                /*{
-                  "type":"postback",
-                  "title":"好棒!",
-                  "payload": "yes",
-                },*/
                 {
                   "type":"postback",
                   "title":"餵我",
@@ -37,25 +32,20 @@ var fb ={
                 {
                   "type":"web_url",
                   "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/web.html?psid=" + sender_psid ,
-                  "title":"店家投石",
+                  "title":"學生投食",
                   "webview_height_ratio": "full",
                   "messenger_extensions": true,
                   "webview_share_button": "hide",
-                },/*
-                {
-                  "type":"web_url",
-                  "url":"https://luffy.ee.ncku.edu.tw/~luben3485/facebookpage/web.html",
-                  "title":"我要投宿",
-                  "webview_height_ratio": "tall",
-                  "messenger_extensions": true,
-                  "webview_share_button": "hide",
-                },*/
+                },
               ],
             }]
           }
         }
       }  
      fb.callSendAPI(sender_psid, response);
+    }
+    else{
+      fb.callSendAPI(sender_psid,other_response);
     }
 
 
@@ -65,11 +55,11 @@ var fb ={
       
           let payload = received_postback.payload;
               if (payload === 'yes') {
-                  response = { "text": "棒ㄅ" }
+                  response = { "text": "那記得快去拿唷~~" }
               } else if (payload === 'no') {
                   response = { "text": "讚齁" }
               }else if(payload === 'feedme'){
-                  response = {"text":"餵你妹"}
+                  response = {"text":"好，沒關係!把機會讓給其他人"}
               }
   fb.callSendAPI(sender_psid, response);
     
