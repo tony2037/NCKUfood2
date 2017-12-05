@@ -19,21 +19,21 @@ var fb ={
                   "type":"postback",
                   "title":"餵我",
                   "payload": "feedme",
-                },/*
+                },
                 {
                   "type":"web_url",
-                  "url":"https://luben3485.github.io/nckufood2.0webpage?" ,
-                  "title":"學生投石",
+                  "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/nckufood_shop.html?psid=" + sender_psid ,
+                  "title":"店家投食",
                   "webview_height_ratio": "tall",
                   "messenger_extensions": true,
                   "webview_share_button": "hide",
-                },*/
+                },
                 
                 {
                   "type":"web_url",
-                  "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/web.html?psid=" + sender_psid ,
+                  "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/nckufood_student.html?psid=" + sender_psid ,
                   "title":"學生投食",
-                  "webview_height_ratio": "full",
+                  "webview_height_ratio": "tall",
                   "messenger_extensions": true,
                   "webview_share_button": "hide",
                 },

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>成大剩食通知2.0 Beta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet" media="screen">
+    <link href="./css/mobile-style.css" rel="stylesheet" media="screen">
+    <link href="./css/nckufood_shop.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="./favicon.png">
+</head>
+
+<body>
+<body>
+    <div class="msg">
+    <h1 id="title">店家投食<h1>
+    <h2 id="info">投食成功！可關閉頁面！</h2>
+    <form class="toss_food">
+    <div class="enter">
+            <div>
+                店家名稱：
+                <select name="店家名稱" id="store_name">
+                <option value="store1">肯德基</option>
+                <option value="store2">麥當勞</option>
+                <option value="store3">張景雲小吃店</option>
+                </select>
+                </div>
+            <div>
+                食物名稱：<input type='text' name='food_name' placeholder="Enter food name">
+            </div>
+
+            <div>
+                食物數量：<input type="text" placeholder="請輸入食物份數" id="food_cost"> <br>
+                每份原價：<input type="text" placeholder="請輸入原價" id="food_cost"> <br>
+                每份特價：<input type="text" placeholder="必須輸入原價五折以下" id="food_discount"> <br>
+            </div>
+
+            <div>
+                結束營業時間：
+                <select name="時" id="hr">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+
+                    
+                </select> 點
+                <select name="分" id="min">
+                    <option value="00">00</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>分
+            </div>
+    </div>
+    </form>
+        
+   
+
+
+    <div class="dropzone"><div class="info"></div></div>
+    <div class="button">
+    <a class="action-button shadow animate blue" id="btn" type="submit" >送出</a>
+    </div>
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/imgur.js"></script>
+    <script type="text/javascript" src="./js/nckufood_shop.js"></script>
+</body>
+
+</html>

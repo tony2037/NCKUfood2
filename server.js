@@ -32,8 +32,8 @@ app.get('/nckufood_student',(req,res)=>{
   res.end('{"status":"success"}');
   var ajaxdata = req.query;
   var food_num = 1;
-  var multi_rate = 2;
-  var ori_candidate_people = ["1493495980699051","1522796911138184"];
+  var multi_rate =3;
+  var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902"];
   var candidate_probability = [0.5,0.5];
  
   var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
@@ -95,18 +95,27 @@ app.get('/nckufood_student',(req,res)=>{
   console.log(req.query);
 });
 /*--webpage--*/
-app.get('/about',function(req,res){
+app.get('/web_student',function(req,res){
   res.sendFile(__dirname + '/public/nckufood_student.html');
+  });
+app.get('/web_shop',function(req,res){
+  res.sendFile(__dirname + '/public/nckufood_shop.html');
   });
 app.get('/css/nckufood_student.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/nckufood_student.css");
   });
 
+app.get('/css/nckufood_shop.css', function(req, res) {
+  res.sendFile(__dirname + "/public/css/nckufood_shop.css");
+  });
 app.get('/js/imgur.js', function(req, res) {
   res.sendFile(__dirname + "/public/js/imgur.js");
   });
 app.get('/js/nckufood_student.js', function(req, res) {
   res.sendFile(__dirname + "/public/js/nckufood_student.js");
+  });
+app.get('/js/nckufood_shop.js', function(req, res) {
+  res.sendFile(__dirname + "/public/js/nckufood_shop.js");
   });
 app.get('/css/style.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/style.css");
@@ -133,6 +142,7 @@ app.post('/webhook',(req, res)=>{
      //這邊之後讀JSON檔??
       messenger.sendTextMessage('1493495980699051', food + '已經發完了唷');
       messenger.sendTextMessage('1522796911138184', food + '已經發完了唷');
+      messenger.sendTextMessage('1485510774829902', food + '已經發完了唷');
     
     }
      else  if(webhook_event.message){
