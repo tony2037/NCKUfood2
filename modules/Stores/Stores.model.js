@@ -6,9 +6,11 @@ Schema = mongoose.Schema;
 var StoresSchema = new Schema({
     shop_name: String,
     food_name: String,
-    foode_number: String,
+    food_number: String,
     deadline: String,
     location: String,
+    time_hr: String,
+    time_min: String,
     normal_price: String,
     special_price: String,
     image_url: String
