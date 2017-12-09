@@ -20,6 +20,7 @@ var credentials = { key: privateKey, cert: certificate, ca: ca };
 const db = require('./db/connect');
 db.start();
 
+const STU = require('./modules/Students/Students.model');
 
 
 
@@ -29,7 +30,9 @@ https.createServer(credentials, app).listen(17487, function () {
 
 var food;//暫時的  發完食物
 app.get('/nckufood_student',(req,res)=>{
-  res.end('{"status":"success"}');
+  
+
+  res.end('{"status":"success"}'); 
   var ajaxdata = req.query;
   var food_num = 1;
   var multi_rate =3;
@@ -44,7 +47,18 @@ app.get('/nckufood_student',(req,res)=>{
   var json = JSON.stringify(myloveobj);
   fs.writeFile('log.json', json, 'utf8');
   food = ajaxdata.food_name;//暫時的 發完食物
-  var sendfood ={
+
+  STU.addStudents({
+    id:ajaxdata.id,
+    food_name:ajaxdata.food_name,
+    food_number:ajaxdata.food_number,
+    deadline:ajaxdata.deadline,
+    location:ajaxdata.location,
+    image_url:ajaxdata.image_url
+  });
+  STU.list_Students();
+
+var sendfood ={
         "attachment":{
           "type": "template",
           "payload":{
