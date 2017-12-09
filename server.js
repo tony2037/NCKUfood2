@@ -71,6 +71,9 @@ app.get('/nckufood_student',(req,res)=>{
   });
 
   EVENTS.push(ev);
+  for(var i = 0; i < EVENTS.length(); i++){
+    console.log(EVENTS[i]);
+  }
 
 ////Create an event
 var sendfood ={
