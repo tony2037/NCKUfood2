@@ -13,6 +13,7 @@ var FBMessenger = require('fb-messenger')
 var messenger = new FBMessenger(fb.page_token)
 var toss_event=[];
 
+var EVENTS = []
 
 var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
 var certificate = fs.readFileSync(__dirname + '/ssl/certificate.crt');
@@ -59,6 +60,20 @@ app.get('/nckufood_student',(req,res)=>{
   });
   STU.list_Students();
 
+  /////Create an event
+  var ev = require('./event/event');
+  ev.event({
+    id:ajaxdata.id,
+    food_name:ajaxdata.food_name,
+    food_number:ajaxdata.food_number,
+    deadline:ajaxdata.deadline,
+    location:ajaxdata.location,
+    image_url:ajaxdata.image_url
+  });
+
+  EVENTS.push(ev);
+
+////Create an event
 var sendfood ={
         "attachment":{
           "type": "template",
