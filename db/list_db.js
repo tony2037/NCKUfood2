@@ -1,6 +1,8 @@
 const STORE = require('../modules/Stores/Stores.model');
 const STUDENT = require('../modules/Students/Students.model');
 const USER = require('../modules/Users/Users.model');
+const db = require('./db/connect');
+db.start();
 
 console.log('stores DB : ===================================');
 STORE.list_Stores();
