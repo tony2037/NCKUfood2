@@ -6,7 +6,7 @@ Schema = mongoose.Schema;
 var StudentsSchema = new Schema({
     id: String,
     food_name: String,
-    foode_number: String,
+    food_number: String,
     deadline: String,
     location: String,
     image_url: String
