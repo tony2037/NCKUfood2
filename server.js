@@ -1,6 +1,6 @@
 'use strict';
 const
-  
+
   https = require('https'),
   fs = require('fs'),
   express = require('express'),
@@ -11,6 +11,7 @@ var fb = require('./fb');
 var func = require('./modules/Users/function.js')
 var FBMessenger = require('fb-messenger')
 var messenger = new FBMessenger(fb.page_token)
+var toss_event=[];
 
 
 var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
@@ -46,7 +47,7 @@ app.get('/nckufood_student',(req,res)=>{
    };
   var json = JSON.stringify(myloveobj);
   fs.writeFile('log.json', json, 'utf8');
-  food = ajaxdata.food_name;//暫時的 發完食物
+ // food = ajaxdata.food_name;//暫時的 發完食物
 
   STU.addStudents({
     id:ajaxdata.id,
@@ -93,7 +94,7 @@ var sendfood ={
                 {
                   "type":"postback",
                   "title":"發完了",
-                  "payload": "empty",
+                  "payload": "empty&"+ajaxdata.food_name,
                 }
               ],
           }
@@ -152,21 +153,30 @@ app.post('/webhook',(req, res)=>{
       let sender_psid = webhook_event.sender.id;
     // console.log(webhook_event);
      console.log('sender psid:'+ sender_psid );
-    if(webhook_event.postback && webhook_event.postback.payload === "empty"){    
-     //這邊之後讀JSON檔??
-      messenger.sendTextMessage('1493495980699051', food + '已經發完了唷');
-      messenger.sendTextMessage('1522796911138184', food + '已經發完了唷');
-      messenger.sendTextMessage('1485510774829902', food + '已經發完了唷');
     
-    }
-     else  if(webhook_event.message){
-        fb.handleMessage(sender_psid, webhook_event.message,"");
+      if(webhook_event.postback){ 
+        var get = webhook_event.postback.payload.split("&");
+        if( get[0]=== "empty"){
+         //這邊之後讀JSON檔??
+         messenger.sendTextMessage('1493495980699051',sender_psid+ "說:"+ get[1] + '已經發完了唷');
+         messenger.sendTextMessage('1522796911138184',sender_psid+ "說:"+ get[1] + '已經發完了唷');
+         messenger.sendTextMessage('1485510774829902',sender_psid+ "說:"+ get[1] + '已經發完了唷');   
+        }else if(get[0]==="yes"){
+
+        
+          messenger.sendTextMessage('1493495980699051'," ");
+          messenger.sendTextMessage('1522796911138184'," ");
+          messenger.sendTextMessage('1485510774829902'," ");   
+        }
+      }
+      else  if(webhook_event.message){
+           fb.handleMessage(sender_psid, webhook_event.message,"");
       }else if(webhook_event.postback){
-        fb.handlePostback(sender_psid, webhook_event.postback);
+           fb.handlePostback(sender_psid, webhook_event.postback);
       }
     });
   
-   res.status(200).send('EVENT_RECEIVED');
+    res.status(200).send('EVENT_RECEIVED');
   }else{
     res.sendStatus(404);
   }
