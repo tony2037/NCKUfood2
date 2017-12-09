@@ -11,7 +11,6 @@ var fb = require('./fb');
 var func = require('./modules/Users/function.js')
 var FBMessenger = require('fb-messenger')
 var messenger = new FBMessenger(fb.page_token)
-var toss_event=[];
 
 var EVENTS = []
 
@@ -182,6 +181,13 @@ app.post('/webhook',(req, res)=>{
           messenger.sendTextMessage('1493495980699051'," ");
           messenger.sendTextMessage('1522796911138184'," ");
           messenger.sendTextMessage('1485510774829902'," ");   
+        }
+        else if(get[0]==="no"){
+        
+          messenger.sendTextMessage('1493495980699051'," ");
+          messenger.sendTextMessage('1522796911138184'," ");
+          messenger.sendTextMessage('1485510774829902'," ");   
+        
         }
       }
       else  if(webhook_event.message){
