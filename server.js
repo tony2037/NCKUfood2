@@ -60,6 +60,7 @@ app.get('/nckufood_student',(req,res)=>{
   STU.list_Students();
 
   /////Create an event
+  /*
   var ev = require('./event/event');
   ev.event({
     id:ajaxdata.id,
@@ -72,10 +73,13 @@ app.get('/nckufood_student',(req,res)=>{
 
   EVENTS.push(ev);
   for(var i = 0; i < EVENTS.length(); i++){
-    console.log(EVENTS[i]);
+   console.log('EVENT' + i);
+   console.log(EVENTS[i]);
   }
-
+*/
 ////Create an event
+var payload_yes = "yes&"+ajaxdata.id;
+var payload_no = "no&"+ajaxdata.id;
 var sendfood ={
         "attachment":{
           "type": "template",
@@ -89,12 +93,12 @@ var sendfood ={
                 {
                   "type":"postback",
                   "title":"我想要",
-                  "payload": "yes&"+ ajaxdata.id,
+                  "payload": "payload_yes",
                 },
                 {
                   "type":"postback",
                   "title":"我不要",
-                  "payload": "no&"+ ajaxdata.id,
+                  "payload": "payload_no",
                 }
               ],
             }]
@@ -116,7 +120,9 @@ var sendfood ={
               ],
           }
         }
-      }  
+      }
+      console.log('myloveobj');
+      console.log(myloveobj.id);
   for(var i=0;i < myloveobj.selectedPeople.length;i++){
     fb.handleMessage(myloveobj.selectedPeople[i],"",sendfood);
   console.log("發食物給"+ myloveobj.selectedPeople[i]+"囉");
