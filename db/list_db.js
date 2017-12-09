@@ -1,7 +1,7 @@
 const STORE = require('../modules/Stores/Stores.model');
 const STUDENT = require('../modules/Students/Students.model');
 const USER = require('../modules/Users/Users.model');
-const db = require('./db/connect');
+const db = require('./connect');
 db.start();
 
 console.log('stores DB : ===================================');

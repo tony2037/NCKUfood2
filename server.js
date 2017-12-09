@@ -86,12 +86,12 @@ var sendfood ={
                 {
                   "type":"postback",
                   "title":"我想要",
-                  "payload": "yes",
+                  "payload": "yes&"+ ajaxdata.id,
                 },
                 {
                   "type":"postback",
                   "title":"我不要",
-                  "payload": "no",
+                  "payload": "no&"+ ajaxdata.id,
                 }
               ],
             }]
