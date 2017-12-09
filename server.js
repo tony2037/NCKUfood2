@@ -93,12 +93,12 @@ var sendfood ={
                 {
                   "type":"postback",
                   "title":"我想要",
-                  "payload": "payload_yes",
+                  "payload": payload_yes,
                 },
                 {
                   "type":"postback",
                   "title":"我不要",
-                  "payload": "payload_no",
+                  "payload": payload_no,
                 }
               ],
             }]
@@ -187,15 +187,15 @@ app.post('/webhook',(req, res)=>{
         }else if(get[0]==="yes"){
 
         
-          messenger.sendTextMessage('1493495980699051'," ");
-          messenger.sendTextMessage('1522796911138184'," ");
-          messenger.sendTextMessage('1485510774829902'," ");   
+          messenger.sendTextMessage('1493495980699051',"yes");
+          messenger.sendTextMessage('1522796911138184',"yes");
+          messenger.sendTextMessage('1485510774829902',"yes");   
         }
         else if(get[0]==="no"){
         
-          messenger.sendTextMessage('1493495980699051'," ");
-          messenger.sendTextMessage('1522796911138184'," ");
-          messenger.sendTextMessage('1485510774829902'," ");   
+          messenger.sendTextMessage('1493495980699051',"no");
+          messenger.sendTextMessage('1522796911138184',"no");
+          messenger.sendTextMessage('1485510774829902',"no");   
         
         }
       }
