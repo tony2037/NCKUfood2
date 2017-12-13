@@ -69,7 +69,7 @@ app.get('/nckufood_student',(req,res)=>{
     deadline:ajaxdata.deadline,
     location:ajaxdata.location,
     image_url:ajaxdata.image_url,
-    ev.promotion = selectedPeople;
+    promotion : selectedPeople
   });
   EVENTS.push(ev);
   /*
