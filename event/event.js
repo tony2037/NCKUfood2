@@ -17,7 +17,7 @@ exports.event = (body)=>{
     this.deadline = body.deadline;
     this.location = body.location;
     this.image_url = body.image_url;
-    this.promotion = [];
-    this.who_say_yes = [];
-    this.who_say_no = []
+    this.promotion = body.promotion;
+    this.who_say_yes = body.who_say_yes;
+    this.who_say_no = body.who_say_no;
 };
