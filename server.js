@@ -32,7 +32,6 @@ https.createServer(credentials, app).listen(17487, function () {
 var food;//暫時的  發完食物
 app.get('/nckufood_student',(req,res)=>{
   
-
   res.end('{"status":"success"}'); 
   var ajaxdata = req.query;
   var food_num = 1;
@@ -47,7 +46,6 @@ app.get('/nckufood_student',(req,res)=>{
    };
   var json = JSON.stringify(myloveobj);
   fs.writeFile('log.json', json, 'utf8');
- // food = ajaxdata.food_name;//暫時的 發完食物
 
   STU.addStudents({
     id:ajaxdata.id,
@@ -57,10 +55,10 @@ app.get('/nckufood_student',(req,res)=>{
     location:ajaxdata.location,
     image_url:ajaxdata.image_url
   });
-  STU.list_Students();
+  //STU.list_Students();
 
   /////Create an event
-  /*
+  
   var ev = require('./event/event');
   ev.event({
     id:ajaxdata.id,
@@ -72,11 +70,11 @@ app.get('/nckufood_student',(req,res)=>{
   });
 
   EVENTS.push(ev);
-  for(var i = 0; i < EVENTS.length(); i++){
+  for(var i = 0; i < EVENTS.length; i++){
    console.log('EVENT' + i);
    console.log(EVENTS[i]);
   }
-*/
+
 ////Create an event
 var payload_yes = "yes&"+ajaxdata.id;
 var payload_no = "no&"+ajaxdata.id;
