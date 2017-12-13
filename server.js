@@ -68,9 +68,9 @@ app.get('/nckufood_student',(req,res)=>{
     food_number:ajaxdata.food_number,
     deadline:ajaxdata.deadline,
     location:ajaxdata.location,
-    image_url:ajaxdata.image_url
+    image_url:ajaxdata.image_url,
+    ev.promotion = selectedPeople;
   });
-  ev.promotion = selectedPeople;
   EVENTS.push(ev);
   /*
   for(var i = 0; i < EVENTS.length; i++){
