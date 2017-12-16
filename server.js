@@ -193,10 +193,14 @@ app.post('/webhook',(req, res)=>{
             if(EVENTS[i].id === sender_psid && EVENTS[i].food_name === get[1]){
               deleted_index=i;
               var pro_sub_no = subtract.sub(EVENTS[i].promotion,EVENTS[i].who_say_no);
-              var who_no_response = subtract.sub(pro_sub_no,EVENTS[i].who_say_yes);  
-              for(var j=0;i<pro_sub_no.length;i++){
-                fb.handleMessage(pro_sub_no[j],"",{"text": EVENTS[i].food_name + "已經發完了"});//發訊息給除了no的人 說食物沒了
-              } 
+              var who_no_response = subtract.sub(pro_sub_no,EVENTS[i].who_say_yes);
+             
+             console.log("所有人" + EVENTS[i].promotion);
+              console.log("所有人-no" + pro_sub_no);
+              console.log("沒回應" + who_no_response);
+              for(var j=0;j<pro_sub_no.length;j++){
+                fb.handleMessage(pro_sub_no[j],"",{"text": EVENTS[i].food_name + " 已經發完了"});//發訊息給除了no的人 說食物沒了
+             } 
             //降低沒回應者的機率   
             }
           }
