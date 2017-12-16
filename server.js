@@ -73,15 +73,19 @@ app.get('/nckufood_student',(req,res)=>{
     who_say_yes:[],
     who_say_no:[]
   });
+<<<<<<< HEAD
 
 
-  EVENTS.push(ev);
+  global.EVENTS.push(ev);
   console.log("0test"+EVENTS[0].food_name);
   console.log("1test"+ev);
+=======
+  global.EVENTS.push(ev);
+>>>>>>> df3eee0452b424ebade0be1868a0d66894412821
   /*
-  for(var i = 0; i < EVENTS.length; i++){
+  for(var i = 0; i < global.EVENTS.length; i++){
    console.log('EVENT' + i);
-   console.log(EVENTS[i]);
+   console.log(global.EVENTS[i]);
   }
 */
 ////Create an event
@@ -193,22 +197,28 @@ app.post('/webhook',(req, res)=>{
         var get = webhook_event.postback.payload.split("&");
         if( get[0]=== "empty"){
           var deleted_index;
-          for(var i = 0; i < EVENTS.length; i++){
-            if(EVENTS[i].id === sender_psid && EVENTS[i].food_name === get[1]){
+          for(var i = 0; i < global.EVENTS.length; i++){
+            if(global.EVENTS[i].id === sender_psid && global.EVENTS[i].food_name === get[1]){
               deleted_index=i;
-              var pro_sub_no = subtract.sub(EVENTS[i].promotion,EVENTS[i].who_say_no);
-              var who_no_response = subtract.sub(pro_sub_no,EVENTS[i].who_say_yes);
+              var pro_sub_no = subtract.sub(global.EVENTS[i].promotion,global.EVENTS[i].who_say_no);
+              var who_no_response = subtract.sub(pro_sub_no,global.EVENTS[i].who_say_yes);
              
+<<<<<<< HEAD
              console.log("所有人    " + EVENTS[i].promotion);
               console.log("所有人-no   " + pro_sub_no);
               console.log("沒回應    " + who_no_response);
+=======
+             console.log("所有人" + global.EVENTS[i].promotion);
+              console.log("所有人-no" + pro_sub_no);
+              console.log("沒回應" + who_no_response);
+>>>>>>> df3eee0452b424ebade0be1868a0d66894412821
               for(var j=0;j<pro_sub_no.length;j++){
-                fb.handleMessage(pro_sub_no[j],"",{"text": EVENTS[i].food_name + " 已經發完了"});//發訊息給除了no的人 說食物沒了
+                fb.handleMessage(pro_sub_no[j],"",{"text": global.EVENTS[i].food_name + " 已經發完了"});//發訊息給除了no的人 說食物沒了
              } 
             //降低沒回應者的機率   
             }
           }
-          EVENTS.splice(deleted_index,1);
+          global.EVENTS.splice(deleted_index,1);
         /*
          messenger.sendTextMessage('1493495980699051',sender_psid+ "說:"+ get[1] + '已經發完了唷');
          messenger.sendTextMessage('1522796911138184',sender_psid+ "說:"+ get[1] + '已經發完了唷');
@@ -217,9 +227,9 @@ app.post('/webhook',(req, res)=>{
         }else if(get[0]==="yes"){
           
           
-          for(var i = 0; i < EVENTS.length; i++){
-           if(EVENTS[i].id === get[1]){
-             EVENTS[i].who_say_yes.push(sender_psid);
+          for(var i = 0; i < global.EVENTS.length; i++){
+           if(global.EVENTS[i].id === get[1]){
+             global.EVENTS[i].who_say_yes.push(sender_psid);
              }
            fb.handleMessage(sender_psid,"",{"text":"you say yes"});
           }/*
@@ -229,9 +239,9 @@ app.post('/webhook',(req, res)=>{
        */
         }else if(get[0]==="no"){
         
-        for(var i = 0; i < EVENTS.length; i++){
-          if(EVENTS[i].id === get[1]){
-            EVENTS[i].who_say_no.push(sender_psid);
+        for(var i = 0; i < global.EVENTS.length; i++){
+          if(global.EVENTS[i].id === get[1]){
+            global.EVENTS[i].who_say_no.push(sender_psid);
           }
           fb.handleMessage(sender_psid,"",{"text":"you say no"});
         }/*
