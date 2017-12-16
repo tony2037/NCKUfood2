@@ -13,7 +13,8 @@ var func = require('./modules/Users/function.js')
 var FBMessenger = require('fb-messenger')
 var messenger = new FBMessenger(fb.page_token)
 
-global.EVENTS = []
+global.EVENTS = [];
+console.log('hi');
 
 var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
 var certificate = fs.readFileSync(__dirname + '/ssl/certificate.crt');
@@ -73,15 +74,14 @@ app.get('/nckufood_student',(req,res)=>{
     who_say_yes:[],
     who_say_no:[]
   });
-<<<<<<< HEAD
+
 
 
   global.EVENTS.push(ev);
-  console.log("0test"+EVENTS[0].food_name);
+  console.log("0test"+global.EVENTS[0].food_name);
   console.log("1test"+ev);
-=======
+
   global.EVENTS.push(ev);
->>>>>>> df3eee0452b424ebade0be1868a0d66894412821
   /*
   for(var i = 0; i < global.EVENTS.length; i++){
    console.log('EVENT' + i);
@@ -203,15 +203,15 @@ app.post('/webhook',(req, res)=>{
               var pro_sub_no = subtract.sub(global.EVENTS[i].promotion,global.EVENTS[i].who_say_no);
               var who_no_response = subtract.sub(pro_sub_no,global.EVENTS[i].who_say_yes);
              
-<<<<<<< HEAD
-             console.log("所有人    " + EVENTS[i].promotion);
+
+             console.log("所有人    " + global.EVENTS[i].promotion);
               console.log("所有人-no   " + pro_sub_no);
               console.log("沒回應    " + who_no_response);
-=======
+
              console.log("所有人" + global.EVENTS[i].promotion);
               console.log("所有人-no" + pro_sub_no);
               console.log("沒回應" + who_no_response);
->>>>>>> df3eee0452b424ebade0be1868a0d66894412821
+
               for(var j=0;j<pro_sub_no.length;j++){
                 fb.handleMessage(pro_sub_no[j],"",{"text": global.EVENTS[i].food_name + " 已經發完了"});//發訊息給除了no的人 說食物沒了
              } 
