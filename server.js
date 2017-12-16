@@ -74,14 +74,13 @@ app.get('/nckufood_student',(req,res)=>{
     who_say_yes:[],
     who_say_no:[]
   });
+  var ev_element = Object.assign({},ev);
+  global.EVENTS.push(ev_element);
+//  console.log(EVENTS.length);
+//  console.log("0test"+global.EVENTS[0].food_name);
+//  console.log("1test"+global.EVENTS[1].food_name);
 
 
-
-  global.EVENTS.push(ev);
-  console.log("0test"+global.EVENTS[0].food_name);
-  console.log("1test"+ev);
-
-  global.EVENTS.push(ev);
   /*
   for(var i = 0; i < global.EVENTS.length; i++){
    console.log('EVENT' + i);
@@ -89,8 +88,8 @@ app.get('/nckufood_student',(req,res)=>{
   }
 */
 ////Create an event
-var payload_yes = "yes&"+ajaxdata.id;
-var payload_no = "no&"+ajaxdata.id;
+var payload_yes = "yes&" + ajaxdata.id + "&" + ajaxdata.food_name;
+var payload_no = "no&"+ajaxdata.id + "&" + ajaxdata.food_name;
 var sendfood ={
         "attachment":{
           "type": "template",
@@ -98,7 +97,7 @@ var sendfood ={
             "template_type": "generic",
             "elements":[{
               "title":"【食物快遞】現在有人贈送免費的" + ajaxdata.food_name + "是否去拿?",
-              "subtitle":"食物數量:"+ ajaxdata.food_number + "\n地址:"+ ajaxdata.location + "\n請在" + ajaxdata.deadline +"前小時來拿",
+              "subtitle":"食物數量:"+ ajaxdata.food_number + "\n地址:"+ ajaxdata.location + "\n請在" + ajaxdata.deadline +"小時前來拿",
               "image_url": ajaxdata.image_url,
               "buttons":[
                 {
@@ -228,10 +227,11 @@ app.post('/webhook',(req, res)=>{
           
           
           for(var i = 0; i < global.EVENTS.length; i++){
-           if(global.EVENTS[i].id === get[1]){
-             global.EVENTS[i].who_say_yes.push(sender_psid);
-             }
-           fb.handleMessage(sender_psid,"",{"text":"you say yes"});
+            if(global.EVENTS[i].id === get[1] && global.EVENTS[i].food_name === get[2]){
+              global.EVENTS[i].who_say_yes.push(sender_psid); 
+              fb.handleMessage(sender_psid,"",{"text":"you say yes"});
+            }
+
           }/*
          messenger.sendTextMessage('1493495980699051',"yes");
           messenger.sendTextMessage('1522796911138184',"yes");
@@ -240,10 +240,11 @@ app.post('/webhook',(req, res)=>{
         }else if(get[0]==="no"){
         
         for(var i = 0; i < global.EVENTS.length; i++){
-          if(global.EVENTS[i].id === get[1]){
+          if(global.EVENTS[i].id === get[1] && global.EVENTS[i].food_name === get[2]){
             global.EVENTS[i].who_say_no.push(sender_psid);
-          }
-          fb.handleMessage(sender_psid,"",{"text":"you say no"});
+             fb.handleMessage(sender_psid,"",{"text":"you say no"});
+         }
+
         }/*
           messenger.sendTextMessage('1493495980699051',"no");
           messenger.sendTextMessage('1522796911138184',"no");
