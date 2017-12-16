@@ -73,7 +73,9 @@ app.get('/nckufood_student',(req,res)=>{
     who_say_yes:[],
     who_say_no:[]
   });
-  global.EVENTS.push(ev);
+
+  var s1 = Object.assign({},ev);
+  global.EVENTS.push(s1);
   /*
   for(var i = 0; i < global.EVENTS.length; i++){
    console.log('EVENT' + i);
