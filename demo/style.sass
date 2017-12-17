@@ -1,0 +1,99 @@
+$gray: rgb(65, 71, 81)
+$title_font: 'cwTeXMing'
+$content_font: 'Noto Sans Kaithi'
+$eng_font: 'Alegreya'
+
+*
+  font-family: 'Roboto' ,微軟正黑體
+  border: px solid 
+html,body
+  padding: 0px
+  margin: 0px 
+.namecard
+  width: 100vw
+  background-color: #fff
+  display: flex
+  margin-bottom: 100px
+  border: px solid black
+  color: $gray
+.namecard h1
+  font-size: 50px
+  display: inline
+
+.namecard h1 span
+  font-size: 25px
+
+.namecard h2
+  font-size: 25px
+
+.namecard .img
+  width: 50%
+  height: 100vh
+  background-size: 500px
+  background-repeat: no-repeat
+  size: contain
+  
+.namecard .imgfilter
+  width: 100%
+  height: 100vh
+  background: linear-gradient(to right, rgba(255,255,255,0) 30%,rgba(255,255,255,0.02) 1%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%)
+  position: absolute
+  z-index: 0
+.namecard 
+  .inf
+    margin-top: 200px
+
+hr
+  border: 1px solid rgba(0,0,0,0.2)
+
+.bgcimg
+  width: 100%
+  height: 100vh
+  background-image: url("https://timedotcom.files.wordpress.com/2014/11/sharing-food.jpg?quality=85")
+  background-attachment: fixed
+  background-size: cover
+  z-index: 0
+.filter
+  width: 100%
+  height: 100vh
+  position: absolute
+  z-index: 100
+  background-color: rgba(0,0,0,0.6)
+  color: white
+  .text
+    width: 100%
+    height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: center
+    text-align: center
+    .title
+      font-family: $title_font
+      font-size: 75px
+    .subtitle
+      font-family: $title_font
+      font-size: 24px
+      
+.containerTitle
+  width: 100%
+  height: 100vh 
+  
+.aboutus
+  display: flex
+  flex-direction: column
+  justify-content: center
+  text-align: center
+  height: 200px
+  margin-top: 100px
+  margin-bottom: 100px
+  .eng
+    font-size: 42px
+    font-family: $eng_font
+    color: rgb(65, 71, 81)
+  .che
+    font-size: 72px
+    font-family: $title_font
+    color: rgb(65, 71, 81)
+  .text
+    color: black
+    line-height: 30px

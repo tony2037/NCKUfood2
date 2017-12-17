@@ -5,8 +5,10 @@ window.onload = function() {
     Reveal.initialize({
         controls: true,
         progress: true,
-        history: true,
+        history: false,
         center: true,
+        controlsTutorial: true,
+        keyboard: true,
     
         transition: 'slide', // none/fade/slide/convex/concave/zoom
 
