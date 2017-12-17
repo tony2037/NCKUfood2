@@ -5,10 +5,11 @@ window.onload = function() {
     Reveal.initialize({
         controls: true,
         progress: true,
-        history: false,
+        history: true,
         center: true,
         controlsTutorial: true,
         keyboard: true,
+        parallaxBackgroundSize: '50% 50%',
     
         transition: 'slide', // none/fade/slide/convex/concave/zoom
 
@@ -23,5 +24,16 @@ window.onload = function() {
             { src: 'https://cdn.bootcss.com/reveal.js/3.4.0/plugin/notes/notes.js', async: true },
         ]
     });
+
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+        var state = Reveal.getState();
+        if(state>1 && state<7){
+            Reveal.configure({ center: false });
+        }else{
+            Reveal.configure({ center: true });
+        }
+
+    } );
     
 };
