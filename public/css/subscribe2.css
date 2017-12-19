@@ -1,0 +1,90 @@
+body{
+    font-family: Microsoft JhengHei;
+     user-select: none; 
+    /*border: 4px dashed #3498DB;*/
+    padding-bottom :10%;
+
+
+}
+#info {
+    color:white;
+    background-color: aquamarine;
+    padding:5px;
+    margin:10px;
+    border-radius: 10px;
+}
+.msg{
+    text-align: center;
+    height: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom:5%;
+    max-width: 100%;
+    
+}
+
+
+.toss_food{
+    margin:0px;
+    background-color: rgb(228, 140, 68);
+    padding:2%;
+    color:white;
+    border-radius: 30px;
+
+    
+}
+.toss_food input{
+    font-size:20px;
+
+}
+.toss_food p{
+    margin:3px;
+    font-size:18px;
+     font-weight:bold;
+}
+
+#title{
+    color:rgb(219, 99, 52);
+    /*#3498DB*/
+}
+
+.button{
+    margin-top: 4%;
+    height:auto;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: auto;
+    text-align: center;
+}
+
+
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+.action-button
+{
+	position: relative;
+	padding: 10px 40px;
+  margin: 0px 10px 10px 0px;
+
+	border-radius: 13px;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+    cursor:pointer;
+}
+.action-button:active
+{
+	transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}

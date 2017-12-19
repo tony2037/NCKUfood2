@@ -82,6 +82,12 @@ app.get('/nckufood_student',(req,res)=>{
   fb.handleMessage(ev.id,"",tossfooder) 
    // fb.handleMessage(myloveobj.id,"",tossfooder) 
 }) 
+
+app.get('/nckufood_subscibe',(req,res)=>{
+
+});
+
+
 /*--webpage--*/
 app.get('/web_student',function(req,res){
   res.sendFile(__dirname + '/public/nckufood_student.html') 
