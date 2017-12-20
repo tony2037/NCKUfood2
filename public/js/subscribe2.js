@@ -17,9 +17,9 @@ var psid;
       psid = aryPara.psid;
     }
     var subscribe_data = [
-      {"id":'std',"value":'學生投石',"check":false},
-      {"id":'str1',"value":'張景雲小吃店',"check":false},
-      {"id":'std2',"value":'又沉撈撈面',"check":false}
+      {"id":'free',"value":'學生投食',"check":false},
+      {"id":'store1',"value":'張景雲小吃店',"check":false},
+      {"id":'store2',"value":'又沉撈撈面',"check":false}
     ]
     var app = new Vue({
       el:'#app',
@@ -30,7 +30,6 @@ var psid;
     $(document).ready(
        $('#btn').on('click',(e)=>{
           e.preventDefault();
-          console.log("dd");
             $.ajax({
               url : "/nckufood_subscribe", ///
               method :"GET",
@@ -41,23 +40,40 @@ var psid;
               dataType:'json',
       
               success :(data)=>{
-                console.log(data[0].check)
+                if(data === true){
+                  alert("訂閱成功")
+                }
+                else{
+                  alert("訂閱失敗")
+                  console.log(err)
+                }
               },
-              error:()=>{
+              error:(err)=>{
+                  alert("訂閱失敗")
+                  console.log(err)
                }
             });
         }),
         $.ajax({
-          url : "/nckufood_subscribe", ///
+          url : "/nckufood_shop", ///
           method :"GET",
           data : {
             id: psid ,
           },
           dataType:'json',
           success :(data)=>{
-            $('#info').toggle();
+            if(data == false){alert('hi new bitch')}
+            else {
+              for(var i=0;i<data.length;i++){
+                for(var j=0;j<subscribe_data.length;j++){
+                  if(data[i].id === subscribe_data[j].id) subscribe_data[j].check = data[i].check
+                }
+              }
+              
+            }
           },
-          error:()=>{
+          error:(err)=>{
+            console.log(err)
            }
         })
     );
