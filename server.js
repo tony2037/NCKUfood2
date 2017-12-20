@@ -29,16 +29,24 @@ var
   https.createServer(credentials, app).listen(17487, function () {
     
     })
+app.get('/subscribe',(req,res)=>{
+  res.end('{"status":"success"}')  
+  var ajaxdata = req.query
+  console.log("id: "+ajaxdata.id)
+  console.log("store_name: "+ajaxdata.subscribe)
+})
+app.get('/nckufood_shop',(req,res)=>{
 
+})
 app.get('/nckufood_student',(req,res)=>{
   res.end('{"status":"success"}')  
   var ajaxdata = req.query 
   var food_num = 1 
-  var multi_rate =5 
+  var multi_rate =7 
   
   //從db抓下來
-  var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
-  var candidate_probability = [0.2,0.2,0.2,0.2,0.2] 
+  var ori_candidate_people = ["1627994987256045","1462027727248686","1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
+  var candidate_probability = [0.2,0.2,0.2,0.2,0.2,0.2,0.2] 
  
   var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   var myloveobj = {
@@ -82,28 +90,9 @@ app.get('/nckufood_student',(req,res)=>{
   fb.handleMessage(ev.id,"",tossfooder) 
    // fb.handleMessage(myloveobj.id,"",tossfooder) 
 }) 
-/*--webpage--*/
-app.get('/web_student',function(req,res){
-  res.sendFile(__dirname + '/public/nckufood_student.html') 
-  }) 
-app.get('/web_shop',function(req,res){
-  res.sendFile(__dirname + '/public/nckufood_shop.html') 
-  }) 
-app.get('/css/nckufood_student.css', function(req, res) {
-  res.sendFile(__dirname + "/public/css/nckufood_student.css") 
-  }) 
-
-app.get('/css/nckufood_shop.css', function(req, res) {
-  res.sendFile(__dirname + "/public/css/nckufood_shop.css") 
-  }) 
+/*--both nckufood_shop and nckufood_student--*/
 app.get('/js/imgur.js', function(req, res) {
   res.sendFile(__dirname + "/public/js/imgur.js") 
-  }) 
-app.get('/js/nckufood_student.js', function(req, res) {
-  res.sendFile(__dirname + "/public/js/nckufood_student.js") 
-  }) 
-app.get('/js/nckufood_shop.js', function(req, res) {
-  res.sendFile(__dirname + "/public/js/nckufood_shop.js") 
   }) 
 app.get('/css/style.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/style.css") 
@@ -114,9 +103,49 @@ app.get('/css/mobile-style.css', function(req, res) {
 app.get('/css/loading-spin.svg', function(req, res) {
   res.sendFile(__dirname + "/public/css/loading-spin.svg") 
   }) 
-/*--webpage--*/
+/*--both nckudood_shop and nckufood_student--*/
+
+/*---nckufood_shop---*/
+app.get('/web_shop',function(req,res){
+  res.sendFile(__dirname + '/public/nckufood_shop.html') 
+  }) 
 
 
+app.get('/css/nckufood_shop.css', function(req, res) {
+  res.sendFile(__dirname + "/public/css/nckufood_shop.css") 
+  }) 
+
+app.get('/js/nckufood_shop.js', function(req, res) {
+  res.sendFile(__dirname + "/public/js/nckufood_shop.js") 
+  }) 
+/*---nckufood_shop---*/
+
+/*---nckufood_student----*/
+app.get('/web_student',function(req,res){
+  res.sendFile(__dirname + '/public/nckufood_student.html') 
+  }) 
+app.get('/css/nckufood_student.css', function(req, res) {
+  res.sendFile(__dirname + "/public/css/nckufood_student.css") 
+  }) 
+app.get('/js/nckufood_student.js', function(req, res) {
+  res.sendFile(__dirname + "/public/js/nckufood_student.js") 
+  }) 
+/*---ncku_student----*/
+
+/*----subscribe----*/
+app.get('/css/subscribe.css', function(req, res) {
+  res.sendFile(__dirname + "/public/css/subscribe.css") 
+  }) 
+app.get('/js/subscribe.js', function(req, res) {
+  res.sendFile(__dirname + "/public/js/subscribe.js") 
+  }) 
+app.get('/web_subscribe',function(req,res){
+  res.sendFile(__dirname + '/public/subscribe.html') 
+  }) 
+/*----subscribe----*/
+
+
+//處理fb事件
 app.post('/webhook',(req, res)=>{
   let body = req.body 
   if(body.object === 'page'){
