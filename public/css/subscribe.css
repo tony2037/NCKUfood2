@@ -3,68 +3,50 @@ body{
      user-select: none; 
     /*border: 4px dashed #3498DB;*/
     padding-bottom :10%;
-    font-weight:bold;
-    font-size:20px;
-    overflow:hidden;
 
-}
-input:-moz-placeholder {  
-    font-family: Microsoft JhengHei;
-}  
-::-webkit-input-placeholder { 
-    font-family: Microsoft JhengHei;
+
 }
 #info {
     color:white;
     background-color: aquamarine;
-    padding:5px;
+    padding:10px;
     margin:10px;
     border-radius: 10px;
     display:none;
 }
 .msg{
-    text-align:left;
+    text-align: center;
     height: 50%;
     margin-right: auto;
     margin-left: auto;
     margin-bottom:5%;
     max-width: 100%;
     
-    
-}
-.msg h1,h2{
-    text-align:center;
 }
 
 
 .toss_food{
     margin:0px;
-    background-color: #3498DB;
-    padding:3%;
+    background-color: rgb(228, 140, 68);
+    padding:2%;
     color:white;
     border-radius: 30px;
-    margin-bottom:2%;
+
     
 }
 .toss_food input{
     font-size:20px;
-    margin:5px;
 
 }
-.toss_food select{
-    font-size:20px;
-    margin:5px;
+.toss_food p{
+    margin:3px;
+    font-size:18px;
+     font-weight:bold;
 }
-
 
 #title{
-    color:#3498DB;
+    color:rgb(219, 99, 52);
     /*#3498DB*/
-}
-
-.enter{
-    margin:auto;
-    width:400px;
 }
 
 .button{

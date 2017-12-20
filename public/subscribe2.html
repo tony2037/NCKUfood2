@@ -9,25 +9,30 @@
     <link href="./css/mobile-style.css" rel="stylesheet" media="screen">
     <link href="./css/subscribe2.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="./favicon.png">
-    <script src="./js/subscribe2.js"></script>
+
 </head>
 
 <body>
 <body>
     <div class="msg">
     <h1 id="title">訂閱設定<h1>
-    <form class="toss_food">
-            <input type="checkbox" style="zoom: 2.4" id="std">學生投石<br>
-            <input type="checkbox" style="zoom: 2.4" id="str1">張景雲小吃店<br>
-            <input type="checkbox" style="zoom: 2.4" id="">劉宥辰撈撈麵<br>
-            <input type="checkbox" style="zoom: 2.4">汁妹汁汁汁<br> 
-    </form>
+            <div id="app">
+                    <form class="toss_food">
+                      <div class="repeat" v-for="subscribe in store_name">
+                        <input type="checkbox" v-bind="subscribe.id" v-model="subscribe.check"/>
+                        <p style="display:inline;">{{subscribe.value}}</p>
+                      </div>
+                    </form>
+                  </div>
+
     </div>
     <div class="button">
     <a class="action-button shadow animate blue" id="btn" type="submit" >更改完畢</a>
     </div>
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+    <script src="./js/subscribe2.js"></script>
 </body>
 
 </html>
