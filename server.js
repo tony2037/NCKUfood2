@@ -12,7 +12,8 @@ const
   db = require('./db/connect'),
   STU = require('./modules/Students/Students.model'),
   mes = require('./utils/mes'),
-  messenger = new FBMessenger(fb.page_token)
+  messenger = new FBMessenger(fb.page_token),
+  US = require('./modules/Users/Users.model')
 
 var subtract = new Subtract((a, b) => { return a === b })
 // 連上db
@@ -34,9 +35,13 @@ app.get('/subscribe',(req,res)=>{
   var ajaxdata = req.query
   console.log("id: "+ajaxdata.id)
   console.log("store_name: "+ajaxdata.subscribe)
+
 })
 app.get('/nckufood_shop',(req,res)=>{
-
+  //Give an id to find everything this user subscribe
+  //return [{value:store_name,check:Boolean}]
+  var id = req.query.id;
+  res.send(US.rending(id));
 })
 app.get('/nckufood_student',(req,res)=>{
   res.end('{"status":"success"}')  
@@ -90,17 +95,17 @@ app.get('/nckufood_student',(req,res)=>{
   fb.handleMessage(ev.id,"",tossfooder) 
    // fb.handleMessage(myloveobj.id,"",tossfooder) 
 }) 
-<<<<<<< HEAD
 
 app.get('/nckufood_subscibe',(req,res)=>{
-
+  //update db
+  
+  res.send(true);
 });
 
 
 /*--webpage--*/
 app.get('/web_student',function(req,res){
   res.sendFile(__dirname + '/public/nckufood_student.html') 
-=======
 /*--both nckufood_shop and nckufood_student--*/
 app.get('/js/imgur.js', function(req, res) {
   res.sendFile(__dirname + "/public/js/imgur.js") 
@@ -110,7 +115,6 @@ app.get('/css/style.css', function(req, res) {
   }) 
 app.get('/css/mobile-style.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/mobile-style.css") 
->>>>>>> 0ae1dc9b9c068c9ad90e51f7acdc298fa6484e90
   }) 
 app.get('/css/loading-spin.svg', function(req, res) {
   res.sendFile(__dirname + "/public/css/loading-spin.svg") 
@@ -145,14 +149,14 @@ app.get('/js/nckufood_student.js', function(req, res) {
 /*---ncku_student----*/
 
 /*----subscribe----*/
-app.get('/css/subscribe.css', function(req, res) {
-  res.sendFile(__dirname + "/public/css/subscribe.css") 
+app.get('/css/subscribe2.css', function(req, res) {
+  res.sendFile(__dirname + "/public/css/subscribe2.css") 
   }) 
-app.get('/js/subscribe.js', function(req, res) {
-  res.sendFile(__dirname + "/public/js/subscribe.js") 
+app.get('/js/subscribe2.js', function(req, res) {
+  res.sendFile(__dirname + "/public/js/subscribe2.js") 
   }) 
 app.get('/web_subscribe',function(req,res){
-  res.sendFile(__dirname + '/public/subscribe.html') 
+  res.sendFile(__dirname + '/public/subscribe2.html') 
   }) 
 /*----subscribe----*/
 
