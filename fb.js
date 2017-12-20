@@ -11,14 +11,14 @@ var fb ={
           "payload":{
             "template_type": "generic",
             "elements":[{
-              "title":"成大勝十平台，開始使用",
-              "subtitle":"選阿給我選",
-              "image_url": "https://cdn2.ettoday.net/images/2709/2709688.jpg",
+              "title":"成大剩食通知2.0",
+              "subtitle":"開始使用",
+              "image_url": "https://scontent.ftpe2-1.fna.fbcdn.net/v/t31.0-8/21427533_115247419188626_8316341334790147882_o.png?oh=f18b0f9ad0135fcc057649a482444459&oe=5AD2C719",
               "buttons":[
                 {
                   "type":"postback",
-                  "title":"餵我",
-                  "payload": "feedme",
+                  "title":"管理訂閱",
+                  "payload": "subscribe",
                 },
                 {
                   "type":"web_url",
@@ -56,8 +56,8 @@ var fb ={
           let payload = received_postback.payload;
               if (payload === 'yes') {
                   response = { "text": "那記得快去拿唷~~" }
-              } else if (payload === 'empty') {
-                  response = { "text": "" }
+              } else if (payload === 'subscribe') {
+                  response = { "text": "此功能將推出，敬請期待！" }
               }else if(payload === 'no'){
                   response = {"text":"好，沒關係!把機會讓給其他人"}
               }

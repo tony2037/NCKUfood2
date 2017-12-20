@@ -52,7 +52,8 @@ module.exports = {
 		body.entry.forEach(function(entry){
 		let webhook_event = entry.messaging[0] 
 		let sender_psid = webhook_event.sender.id 
-		if(webhook_event.postback){
+    console.log("get post id:"+sender_psid);
+    if(webhook_event.postback){
 			var get = webhook_event.postback.payload.split("&") 
 			if(get[0]=== "empty"){
 				var deleted_index 
@@ -85,6 +86,9 @@ module.exports = {
 				  }
 			  }
 			}
+      else if(get[0]==="subscribe"){
+					fb.handleMessage(sender_psid,"",{"text":"功能即將推出，敬請期待！"}) 
+      }
 		}
 		else if(webhook_event.message){
 		  fb.handleMessage(sender_psid, webhook_event.message,"") 

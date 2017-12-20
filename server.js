@@ -34,11 +34,11 @@ app.get('/nckufood_student',(req,res)=>{
   res.end('{"status":"success"}')  
   var ajaxdata = req.query 
   var food_num = 1 
-  var multi_rate =5 
+  var multi_rate =6 
   
   //從db抓下來
-  var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
-  var candidate_probability = [0.2,0.2,0.2,0.2,0.2] 
+  var ori_candidate_people = ["100001972882317","1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
+  var candidate_probability = [0.2,0.2,0.2,0.2,0.2,0.2] 
  
   var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   var myloveobj = {
