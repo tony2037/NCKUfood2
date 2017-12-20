@@ -41,3 +41,31 @@ exports.list_Users = ()=>{
         console.log(Users);
       });
 }
+
+exports.subscribe_update = (body)=>{
+    let userid = body.id;
+    let subscribe = body.subscribe;
+    function find_if(element,index,array,condition){
+        if(element == condition){
+            return true;
+        }
+    }
+    var query = Users.findOne({id:userid},(err,doc)=>{
+        //doc.channel_pay;
+        if(err)console.log(err);
+        for(var i = 0 ; i < doc.channel_pay.length; i++){
+            if(subscribe.find(find_if(condition = doc.channel_pay[i].name) != undefined){   //represent it exist
+                doc.channel_pay[i].subscribe = true;
+                doc.channel_pay[i].po = 25;
+            }else{
+                doc.channel_pay[i].subscribe = false;
+                doc.channel_free[i].po = 0;
+            }
+        }      
+
+        doc.visits.$inc();
+        doc.save();
+    });
+}
+
+exports.who_subscribe_storeA = (storeA)=>{}
