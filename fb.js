@@ -16,9 +16,12 @@ var fb ={
               "image_url": "https://scontent.ftpe2-1.fna.fbcdn.net/v/t31.0-8/21427533_115247419188626_8316341334790147882_o.png?oh=f18b0f9ad0135fcc057649a482444459&oe=5AD2C719",
               "buttons":[
                 {
-                  "type":"postback",
+                  "type":"web_url",
+                  "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/subscribe.html?psid=" + sender_psid ,
                   "title":"管理訂閱",
-                  "payload": "subscribe",
+                  "webview_height_ratio": "tall",
+                  "messenger_extensions": true,
+                  "webview_share_button": "hide",
                 },
                 {
                   "type":"web_url",
