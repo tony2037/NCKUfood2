@@ -41,7 +41,7 @@ var psid;
               dataType:'json',
       
               success :(data)=>{
-                $('#info').toggle();
+                console.log(data[0].check)
               },
               error:()=>{
                }
