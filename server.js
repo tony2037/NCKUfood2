@@ -31,12 +31,13 @@ var
     
     })
 app.get('/subscribe',(req,res)=>{
-  res.end('{"status":"success"}')  
+  res.send('{"status":"success"}')  
   var ajaxdata = req.query
   console.log("id: "+ajaxdata.id)
   console.log("store_name: "+ajaxdata.subscribe)
 
 })
+
 app.get('/nckufood_shop',(req,res)=>{
   //Give an id to find everything this user subscribe
   //return [{value:store_name,check:Boolean}]
@@ -44,7 +45,7 @@ app.get('/nckufood_shop',(req,res)=>{
   res.send(US.rending(id));
 })
 app.get('/nckufood_student',(req,res)=>{
-  res.end('{"status":"success"}')  
+  res.send('{"status":"success"}')  
   var ajaxdata = req.query 
   var food_num = 1 
   var multi_rate =7 
@@ -100,12 +101,13 @@ app.get('/nckufood_subscibe',(req,res)=>{
   //update db
   
   res.send(true);
-});
+})
 
 
 /*--webpage--*/
 app.get('/web_student',function(req,res){
-  res.sendFile(__dirname + '/public/nckufood_student.html') 
+  res.sendFile(__dirname + '/public/nckufood_student.html') })
+  
 /*--both nckufood_shop and nckufood_student--*/
 app.get('/js/imgur.js', function(req, res) {
   res.sendFile(__dirname + "/public/js/imgur.js") 
@@ -152,7 +154,7 @@ app.get('/js/nckufood_student.js', function(req, res) {
 app.get('/css/subscribe2.css', function(req, res) {
   res.sendFile(__dirname + "/public/css/subscribe2.css") 
   }) 
-app.get('/js/subscribe2.js', function(req, res) {
+app.get('/js/subscribe2.js', function(req, res){
   res.sendFile(__dirname + "/public/js/subscribe2.js") 
   }) 
 app.get('/web_subscribe',function(req,res){
@@ -171,6 +173,7 @@ app.post('/webhook',(req, res)=>{
     res.sendStatus(404) 
   }
 }) 
+
 app.get('/webhook',(req,res)=>{
   let VERIFY_TOKEN = "aaabbb" 
   let mode = req.query['hub.mode'] 
@@ -184,13 +187,3 @@ app.get('/webhook',(req,res)=>{
     }
   }
 }) 
-
-
-
-
-
-
-
-
-
-
