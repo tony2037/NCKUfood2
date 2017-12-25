@@ -98,13 +98,13 @@ exports.rending = (id)=>{
     //Give an id to find everything this user subscribe
     //return [{value:store_name,check:Boolean}]
     global.responds = [];
-    global.global.if_exit = true;
+    global.if_exit = true;
     
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
-        console.log(doc);
+        console.log('doc'+ doc);
         if(doc == null){
-            global.global.if_exit = false;
+            global.if_exit = false;
         }else{
             global.responds.push({value:"free", check: doc.channel_free.subscribe});
             
