@@ -42,10 +42,11 @@ exports.list_Users = ()=>{
       });
 }
 
-exports.subscribe_update = (body, pid)=>{
+exports.subscribe_update = (body)=>{
     //[{id:store_name,check:Boolean}]
-    //let subscribe = body.subscribe;
-    //let userid = body.id;
+    /*{id:pid , subscribe:[]} */
+    let subscribe = body.subscribe;
+    let userid = body.id;
 
     function find_if(element,index,array,condition){
         if(element == condition){
@@ -63,14 +64,19 @@ exports.subscribe_update = (body, pid)=>{
                 channel_free:{subscribe: Boolean,po:Number,},
                 channel_pay: [{name:String, po: Number, subscribe: Boolean}]
                 };
-            addUsers({
-                id: pid,
-                channel_free:{subscribe: body[0].check,po:25,},
-                channel_pay: [{name:String, po: Number, subscribe: Boolean}]
-                });
+            data.id = userid;
+            data.channel_free.subscribe = subscribe[0].check;
+            data.channel_free.po = 25;
+            for(var i=1; i< subscribe.length; i++){
+                data.channel_pay.name = subscribe[i].id;
+                data.channel_pay.po = 25;
+                data.channel_pay.subscribe = subscribe[i].check;
+            }
+            addUsers(data);
 
         }else{
             //change User's setting
+
             
         }
         for(var i = 0 ; i < doc.channel_pay.length; i++){
@@ -96,6 +102,7 @@ exports.rending = (id)=>{
     
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
+        console.log(doc);
         if(doc == null){
             if_exit = false;
         }
