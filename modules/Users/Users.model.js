@@ -127,7 +127,8 @@ exports.rending = (id)=>{
         }*/
     });
 
-
+    console.log("global.if_exit  " + global.if_exit);
+    console.log("global.responds " + global.responds);
     if(global.if_exit == true){
         console.log('global.responds');
         return global.responds;
