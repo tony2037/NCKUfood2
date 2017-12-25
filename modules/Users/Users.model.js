@@ -44,8 +44,8 @@ exports.list_Users = ()=>{
 
 exports.subscribe_update = (body, pid)=>{
     //[{id:store_name,check:Boolean}]
-    let subscribe = body.subscribe;
-    let userid = body.id;
+    //let subscribe = body.subscribe;
+    //let userid = body.id;
 
     function find_if(element,index,array,condition){
         if(element == condition){
@@ -58,9 +58,14 @@ exports.subscribe_update = (body, pid)=>{
 
         if(doc == null){
             //new User
-            var UsersEntity = new Users({
+            var data = {
                 id: String,
                 channel_free:{subscribe: Boolean,po:Number,},
+                channel_pay: [{name:String, po: Number, subscribe: Boolean}]
+                };
+            addUsers({
+                id: pid,
+                channel_free:{subscribe: body[0].check,po:25,},
                 channel_pay: [{name:String, po: Number, subscribe: Boolean}]
                 });
 
@@ -86,11 +91,13 @@ exports.subscribe_update = (body, pid)=>{
 exports.rending = (id)=>{
     //Give an id to find everything this user subscribe
     //return [{value:store_name,check:Boolean}]
-    var responds = []
+    var responds = [];
+    var if_exit = true;
+    
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
         if(doc == null){
-            return false;
+            if_exit = false;
         }
         /*
         if(doc.channel_free.subscribe == true){
@@ -114,9 +121,14 @@ exports.rending = (id)=>{
 
         
 
-        return responds;
+        
     });
 
+    if(if_exit == true){
+        return responds;
+    }else{
+        return false;
+    }
     
 }
 
