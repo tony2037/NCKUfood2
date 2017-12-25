@@ -97,40 +97,40 @@ exports.subscribe_update = (body)=>{
 exports.rending = (id)=>{
     //Give an id to find everything this user subscribe
     //return [{value:store_name,check:Boolean}]
-    var responds = [];
-    var if_exit = true;
+    global.responds = [];
+    global.global.if_exit = true;
     
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
         console.log(doc);
         if(doc == null){
-            if_exit = false;
-        }
-        else{
-            responds.push({value:"free", check: doc.channel_free.subscribe});
+            global.global.if_exit = false;
+        }else{
+            global.responds.push({value:"free", check: doc.channel_free.subscribe});
             
             for(var i=0; i < doc.channel_pay.length; i++){
                 /*
                 if(doc.channel_pay[i].subscribe == true){
-                responds.push({value:doc.channel_pay[i].name, check:true});
+                global.responds.push({value:doc.channel_pay[i].name, check:true});
                 }else{
-                responds.push({value:doc.channel_pay[i].name, check:false});
+                global.responds.push({value:doc.channel_pay[i].name, check:false});
                 }
                 */
-                responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
+                global.responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
             }
         }
         /*
         if(doc.channel_free.subscribe == true){
-            responds.push({value:'free',check:true});
+            global.responds.push({value:'free',check:true});
         }else{
-            responds.push({value:'free',check:false});
+            global.responds.push({value:'free',check:false});
         }*/
     });
 
-    if(if_exit == true){
-        console.log('responds');
-        return responds;
+
+    if(global.if_exit == true){
+        console.log('global.responds');
+        return global.responds;
     }else{
         console.log('false');
         return false;
