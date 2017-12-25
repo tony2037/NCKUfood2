@@ -42,7 +42,7 @@ exports.list_Users = ()=>{
       });
 }
 
-exports.subscribe_update = (body)=>{
+exports.subscribe_update = (body, pid)=>{
     //[{id:store_name,check:Boolean}]
     let subscribe = body.subscribe;
     let userid = body.id;
@@ -58,6 +58,11 @@ exports.subscribe_update = (body)=>{
 
         if(doc == null){
             //new User
+            var UsersEntity = new Users({
+                id: String,
+                channel_free:{subscribe: Boolean,po:Number,},
+                channel_pay: [{name:String, po: Number, subscribe: Boolean}]
+                });
 
         }else{
             //change User's setting
@@ -84,11 +89,17 @@ exports.rending = (id)=>{
     var responds = []
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
+        if(doc == null){
+            return false;
+        }
+        /*
         if(doc.channel_free.subscribe == true){
             responds.push({value:'free',check:true});
         }else{
             responds.push({value:'free',check:false});
-        }
+        }*/
+
+        responds.push({value:"free", check: doc.channel_free.subscribe});
 
         for(var i=0; i < doc.channel_pay.length; i++){
             /*
@@ -101,9 +112,7 @@ exports.rending = (id)=>{
             responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
         }
 
-        if(doc == null){
-            return false;
-        }
+        
 
         return responds;
     });
