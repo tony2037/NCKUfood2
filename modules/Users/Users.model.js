@@ -105,7 +105,20 @@ exports.rending = (id)=>{
         console.log(doc);
         if(doc == null){
             if_exit = false;
-            break;
+        }
+        else{
+            responds.push({value:"free", check: doc.channel_free.subscribe});
+            
+            for(var i=0; i < doc.channel_pay.length; i++){
+                /*
+                if(doc.channel_pay[i].subscribe == true){
+                responds.push({value:doc.channel_pay[i].name, check:true});
+                }else{
+                responds.push({value:doc.channel_pay[i].name, check:false});
+                }
+                */
+                responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
+            }
         }
         /*
         if(doc.channel_free.subscribe == true){
@@ -113,23 +126,6 @@ exports.rending = (id)=>{
         }else{
             responds.push({value:'free',check:false});
         }*/
-
-        responds.push({value:"free", check: doc.channel_free.subscribe});
-
-        for(var i=0; i < doc.channel_pay.length; i++){
-            /*
-            if(doc.channel_pay[i].subscribe == true){
-                responds.push({value:doc.channel_pay[i].name, check:true});
-            }else{
-                responds.push({value:doc.channel_pay[i].name, check:false});
-            }
-            */
-            responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
-        }
-
-        
-
-        
     });
 
     if(if_exit == true){
