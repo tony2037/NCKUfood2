@@ -99,44 +99,56 @@ exports.rending = (id)=>{
     //return [{value:store_name,check:Boolean}]
     global.responds = [];
     global.if_exit = true;
+    var result = {responds:[]};
     
+    /*
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
         console.log('doc'+ doc);
+
         if(doc == null){
             global.if_exit = false;
         }else{
             global.responds.push({value:"free", check: doc.channel_free.subscribe});
             
             for(var i=0; i < doc.channel_pay.length; i++){
-                /*
-                if(doc.channel_pay[i].subscribe == true){
-                global.responds.push({value:doc.channel_pay[i].name, check:true});
-                }else{
-                global.responds.push({value:doc.channel_pay[i].name, check:false});
-                }
-                */
+               
                 global.responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
             }
         }
-        /*
-        if(doc.channel_free.subscribe == true){
-            global.responds.push({value:'free',check:true});
-        }else{
-            global.responds.push({value:'free',check:false});
-        }*/
     });
+    */
 
-    console.log("global.if_exit  " + global.if_exit);
-    console.log("global.responds " + global.responds);
-    if(global.if_exit == true){
-        console.log('global.responds');
-        return global.responds;
-    }else{
-        console.log('false');
-        return false;
-    }
+    var promise = Users.findOne({id:id}).exec();
+    promise.then(function(User){
+        if(User == null){
+            global.if_exit = false;
+        }else{
+            global.responds.push({value:"free", check: User.channel_free.subscribe});
+
+            for(var i=0; i < User.channel_pay.length; i++){
+                global.responds.push({value:User.channel_pay[i].name, check:User.channel_pay[i].subscribe});
+            }
+        }
+     }).error(function(error){
+        console.log(error);
+     });
+        
+      
+     console.log("global.if_exit  " + global.if_exit);
+     console.log("global.responds " + global.responds);
+     if(global.if_exit == true){
+         console.log('global.responds');
+         return global.responds;
+     }else{
+         console.log('false');
+         return false;
+     }
+       
+            
+            
+     }
     
-}
+    
 
 exports.who_subscribe_storeA = (storeA)=>{}
