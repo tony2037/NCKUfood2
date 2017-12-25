@@ -91,19 +91,24 @@ exports.rending = (id)=>{
         }
 
         for(var i=0; i < doc.channel_pay.length; i++){
+            /*
             if(doc.channel_pay[i].subscribe == true){
                 responds.push({value:doc.channel_pay[i].name, check:true});
             }else{
                 responds.push({value:doc.channel_pay[i].name, check:false});
             }
+            */
+            responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
         }
 
         if(doc == null){
             return false;
         }
+
+        return responds;
     });
 
-    return responds;
+    
 }
 
 exports.who_subscribe_storeA = (storeA)=>{}
