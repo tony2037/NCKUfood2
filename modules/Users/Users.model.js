@@ -102,7 +102,7 @@ exports.rending = (id)=>{
     
     Users.findOne({id:id},(err,doc)=>{
         if(err)console.log(err);
-        //console.log(doc);
+        console.log(doc);
         if(doc == null){
             if_exit = false;
         }
