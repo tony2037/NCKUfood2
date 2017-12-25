@@ -94,7 +94,7 @@ exports.subscribe_update = (body)=>{
     });
 }
 
-exports.rending = (id)=>{
+exports.rending2 = (id)=>{
     //Give an id to find everything this user subscribe
     //return [{value:store_name,check:Boolean}]
     global.responds = [];
@@ -148,6 +148,21 @@ exports.rending = (id)=>{
             
             
      }
+
+exports.rending = (id)=>{
+    var responds = []
+    var result = Users.findOne({id:id});
+    if(result == null){
+        return false;
+    }else{
+        responds.push({value:"free", check: result.channel_free.subscribe});
+        
+        for(var i=0; i < result.channel_pay.length; i++){
+              responds.push({value:result.channel_pay[i].name, check:result.channel_pay[i].subscribe});
+        }
+        return responds;
+    }
+}
     
     
 
