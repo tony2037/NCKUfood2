@@ -105,6 +105,7 @@ exports.rending = (id)=>{
         console.log(doc);
         if(doc == null){
             if_exit = false;
+            break;
         }
         /*
         if(doc.channel_free.subscribe == true){
