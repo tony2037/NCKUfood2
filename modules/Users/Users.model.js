@@ -150,17 +150,30 @@ exports.rending2 = (id)=>{
      }
 
 exports.rending = (id)=>{
-    var responds = []
+    var responds = [];
+    var exist = true;
     var result = Users.findOne({id:id});
-    if(result == null){
+    
+    result.then((doc)=>{
+        console.log(" doc : " + doc);
+        if(doc == null){
+            exist = false;
+        }else{
+            console.log(" doc : " + doc);
+            responds.push({value:"free", check: doc.channel_free.subscribe});
+            
+            for(var i=0; i < doc.channel_pay.length; i++){
+                  responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
+            }
+        }
+    });
+
+    var promise = result.exec();
+    promise.then((doc)=>{})
+    promise.exec();
+    if(exist = false){
         return false;
     }else{
-        console.log(result);
-        responds.push({value:"free", check: result.channel_free.subscribe});
-        
-        for(var i=0; i < result.channel_pay.length; i++){
-              responds.push({value:result.channel_pay[i].name, check:result.channel_pay[i].subscribe});
-        }
         return responds;
     }
 }
