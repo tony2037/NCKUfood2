@@ -155,6 +155,7 @@ exports.rending = (id)=>{
     if(result == null){
         return false;
     }else{
+        console.log(result);
         responds.push({value:"free", check: result.channel_free.subscribe});
         
         for(var i=0; i < result.channel_pay.length; i++){
