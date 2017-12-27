@@ -10,6 +10,9 @@ var UsersSchema = new Schema({
     channel_pay: [{name:String, po: Number, subscribe: Boolean}]
     },{collection : 'Users'});
 
+UsersSchema.statics.find_by_id = function(id, callback) {
+    return this.findOne({id : id}, callback);
+};
 
 var Users = mongoose.model("Users",UsersSchema);
 
@@ -18,9 +21,7 @@ UsersSchema.methods.findbyid = function(id, callback) {
     return this.model('Users').find({id: id}, callback);
 }*/
 
-UsersSchema.statics.findbyid = function(id, callback) {
-    return this.findOne({id : id}, callback);
-}
+
 
 exports.addUsers = (body)=>{
     var UsersEntity = new Users(body);
@@ -192,11 +193,7 @@ exports.rending = (id)=>{
 exports.who_subscribe_storeA = (storeA)=>{}
 
 exports.findbyid = (id)=>{
-    var mongoose = require('mongoose');
-      const connection = mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
-      var db_ = mongoose.connection;
 
-    var Users = db_.model('Users', UsersSchema);
     Users.findbyid(id, function(err, doc){
         if(err) return console.log(err);
 
