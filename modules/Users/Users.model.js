@@ -196,7 +196,18 @@ exports.findbyid = (id)=>{
 
     Users.find_by_id(id, function(err, doc){
         if(err) return console.log(err);
-
         console.log(doc);
-    })
+        if(doc == null){
+            return false;
+        }else{
+            var responds = [];
+            responds.push({value:"free", check: doc.channel_free.subscribe});
+            
+            for(var i=0; i < doc.channel_pay.length; i++){
+                  responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
+            }
+            return responds;
+        }
+    });
+
 }                                                                                                                                                                                                           
