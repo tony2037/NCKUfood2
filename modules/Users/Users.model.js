@@ -194,7 +194,7 @@ exports.who_subscribe_storeA = (storeA)=>{}
 
 exports.findbyid = (id)=>{
 
-    Users.findbyid(id, function(err, doc){
+    Users.find_by_id(id, function(err, doc){
         if(err) return console.log(err);
 
         console.log(doc);
