@@ -13,8 +13,8 @@ var UsersSchema = new Schema({
 
 var Users = mongoose.model("Users",UsersSchema);
 
-mongooseSchema.methods.findbyid = function(id, callback) {
-    return this.model('mongoose').find({id: id}, callback);
+UsersSchema.methods.findbyid = function(id, callback) {
+    return this.model('Users').find({id: id}, callback);
 }
 
 exports.addUsers = (body)=>{
