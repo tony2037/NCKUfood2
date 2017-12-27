@@ -191,10 +191,7 @@ exports.rending = (id)=>{
 
 exports.who_subscribe_storeA = (storeA)=>{}
 
-exports.findbyid = (id)=>{
-    var mongoose = require('mongoose');
-    const connection = mongoose.connect('mongodb://wp2017_groupk:uorgn68c@localhost/wp2017_groupk');
-    var db = mongoose.connection;
+exports.findbyid = (id , db)=>{
 
     var Users = db.model('Users', UsersSchema);
     Users.findbyid(id, function(err, doc){
