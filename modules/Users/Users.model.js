@@ -18,7 +18,7 @@ UsersSchema.methods.findbyid = function(id, callback) {
 }
 
 UsersSchema.statics.findbyid = function(id, callback) {
-    return this.find({id : id}, callback);
+    return this.findOne({id : id}, callback);
 }
 
 exports.addUsers = (body)=>{
