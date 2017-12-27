@@ -206,8 +206,22 @@ exports.findbyid = (id ,res)=>{
             for(var i=0; i < doc.channel_pay.length; i++){
                   responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
             }
+            for(var i=0; i< responds.length; i++)
+              console.log('responds + ' + responds[i]);
             res.send(responds);
         }
     });
 
 }                                                                                                                                                                                                           
+exports.james = (id,fn)=>{
+  Users.findOne({id:id},(err,doc)=>{
+    var exist = false
+    if(err)console.log(err)
+    if(doc == null){
+      fn(false)
+    }else{
+      
+    }
+    fn(exist)
+ })
+}
