@@ -17,6 +17,10 @@ UsersSchema.methods.findbyid = function(id, callback) {
     return this.model('Users').find({id: id}, callback);
 }
 
+UsersSchema.statics.findbyid = function(id, callback) {
+    return this.find({id : id}, callback);
+}
+
 exports.addUsers = (body)=>{
     var UsersEntity = new Users(body);
     UsersEntity.save(function(error,doc) {
@@ -187,12 +191,8 @@ exports.rending = (id)=>{
 exports.who_subscribe_storeA = (storeA)=>{}
 
 exports.findbyid = (id)=>{
-    var UsersEntity = new Users({});
-    UsersEntity.findbyid(id, function(error, result){
-        if(error) {
-            console.log(error);
-        } else {
-            console.log(result);
-        }
-    });
+    Users.findById(id, function(err, doc){
+        if (err) return console.log(err);
+        console.log(doc);
+    })
 }
