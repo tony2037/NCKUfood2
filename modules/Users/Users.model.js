@@ -13,9 +13,10 @@ var UsersSchema = new Schema({
 
 var Users = mongoose.model("Users",UsersSchema);
 
+/*
 UsersSchema.methods.findbyid = function(id, callback) {
     return this.model('Users').find({id: id}, callback);
-}
+}*/
 
 UsersSchema.statics.findbyid = function(id, callback) {
     return this.findOne({id : id}, callback);
@@ -191,8 +192,11 @@ exports.rending = (id)=>{
 exports.who_subscribe_storeA = (storeA)=>{}
 
 exports.findbyid = (id)=>{
-    Users.findById(id, function(err, doc){
-        if (err) return console.log(err);
+
+    
+    Users.findbyid(id, function(err, doc){
+        if(err) return console.log(err);
+
         console.log(doc);
     })
-}
+}                                                                                                                                                                                                           
