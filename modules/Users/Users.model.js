@@ -13,6 +13,10 @@ var UsersSchema = new Schema({
 
 var Users = mongoose.model("Users",UsersSchema);
 
+mongooseSchema.methods.findbyid = function(id, callback) {
+    return this.model('mongoose').find({id: id}, callback);
+}
+
 exports.addUsers = (body)=>{
     var UsersEntity = new Users(body);
     UsersEntity.save(function(error,doc) {
@@ -181,3 +185,14 @@ exports.rending = (id)=>{
     
 
 exports.who_subscribe_storeA = (storeA)=>{}
+
+exports.findbyid = (id)=>{
+    var UsersEntity = new Users({});
+    UsersEntity.findbyid(id, function(error, result){
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(result);
+        }
+    });
+}
