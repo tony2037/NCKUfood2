@@ -192,13 +192,13 @@ exports.rending = (id)=>{
 
 exports.who_subscribe_storeA = (storeA)=>{}
 
-exports.findbyid = (id ,res)=>{
+exports.findbyid = (id ,fn)=>{
 
     Users.find_by_id(id, function(err, doc){
-        if(err) return console.log(err);
-        console.log(doc);
+        if(err)  console.log(err);
+    
         if(doc == null){
-            res.send(false);
+           fn(false);
         }else{
             var responds = [];
             responds.push({value:"free", check: doc.channel_free.subscribe});
@@ -206,7 +206,7 @@ exports.findbyid = (id ,res)=>{
             for(var i=0; i < doc.channel_pay.length; i++){
                   responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
             }
-            res.send(responds);
+            fn(responds);
         }
     });
 
