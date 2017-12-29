@@ -93,7 +93,7 @@ exports.subscribe_update = (body)=>{
                     } //update
                 }
             }
-            doc.visits.$inc();
+            //doc.visits.$inc();
             doc.save();
         }
         
