@@ -19,7 +19,7 @@ var psid;
     var subscribe_data = [
       {"id":'free',"value":'學生投食',"check":false},
       {"id":'store1',"value":'張景雲小吃店',"check":false},
-      {"id":'store2',"value":'又沉撈撈面',"check":false}
+      {"id":'store2',"value":'宥辰撈撈面',"check":false}
     ]
     var app = new Vue({
       el:'#app',
@@ -55,14 +55,14 @@ var psid;
             });
         }),
         $.ajax({
-          url : "/nckufood_shop", ///
+          url : "/rending", ///
           method :"GET",
           data : {
             id: psid ,
           },
           dataType:'json',
           success :(data)=>{
-            if(data == false){alert('hi new bitch')}
+            if(data === false){alert(data)}
             else {
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
@@ -73,7 +73,7 @@ var psid;
             }
           },
           error:(err)=>{
-            console.log(err)
+            alert(err)
            }
         })
     );

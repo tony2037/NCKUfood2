@@ -16,5 +16,3 @@ exports.start = (success) => {
         }
     });
 };
-
-

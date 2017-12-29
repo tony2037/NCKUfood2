@@ -30,29 +30,46 @@ var
   https.createServer(credentials, app).listen(17487, function () {
     
     })
-app.get('/subscribe',(req,res)=>{
-  res.send('{"status":"success"}')  
-  var ajaxdata = req.query
-  console.log("id: "+ajaxdata.id)
-  console.log("store_name: "+ajaxdata.subscribe)
+app.get('/rending',(req,res)=>{
+  var id = req.query.id
+  US.findbyid(id,(exist, responds)=>{
+    console.log(exist);
+    if(exist){
+          res.send(responds)
+      }
+      else{
+        res.send(exist);
+      }
+    })
+ // res.send(US.rending(id))
+})
+app.get('/nckufood_subscribe',(req,res)=>{
 
+  var ajaxdata = req.query
+  var newsubscribe = []//origin subscribe array subtract value(chinese store name)
+  for(var i=0;i < ajaxdata.subscribe.length ; i++ ){
+    newsubscribe.push({id: ajaxdata.subscribe[i].id,check:ajaxdata.subscribe[i].check})
+  }
+  var data = { id:ajaxdata.id , subscribe: newsubscribe}// following function receives this data
+  US.subscribe_update(data)// update subscribe(we'll check whether you subscribed in this function)
+  res.send("true")
 })
 
 app.get('/nckufood_shop',(req,res)=>{
   //Give an id to find everything this user subscribe
   //return [{value:store_name,check:Boolean}]
   var id = req.query.id;
-  res.send(US.rending(id));
+//  res.send(US.rending(id));
 })
 app.get('/nckufood_student',(req,res)=>{
   res.send('{"status":"success"}')  
   var ajaxdata = req.query 
   var food_num = 1 
-  var multi_rate =7 
+  var multi_rate =5 
   
   //從db抓下來
-  var ori_candidate_people = ["1627994987256045","1462027727248686","1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
-  var candidate_probability = [0.2,0.2,0.2,0.2,0.2,0.2,0.2] 
+  var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
+  var candidate_probability = [0.2,0.2,0.2,0.2,0.2] 
  
   var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
   var myloveobj = {
@@ -71,6 +88,12 @@ app.get('/nckufood_student',(req,res)=>{
     image_url:ajaxdata.image_url
   }) 
 
+/*  US.addUsers({
+   id:'1493495980699051',
+    channel_free:{subscribe: true, po: 25},
+    channel_pay:[{name:'store1', po:25, subscribe: true},{name:'store2', po:25, subscribe: false}]
+  });
+*/
   //Create an event
   
   var ev = require('./event/event') 
@@ -96,12 +119,6 @@ app.get('/nckufood_student',(req,res)=>{
   fb.handleMessage(ev.id,"",tossfooder) 
    // fb.handleMessage(myloveobj.id,"",tossfooder) 
 }) 
-
-app.get('/nckufood_subscibe',(req,res)=>{
-  //update db
-  
-  res.send(true);
-})
 
 
 /*--webpage--*/

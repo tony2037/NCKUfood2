@@ -10,8 +10,18 @@ var UsersSchema = new Schema({
     channel_pay: [{name:String, po: Number, subscribe: Boolean}]
     },{collection : 'Users'});
 
+UsersSchema.statics.find_by_id = function(id, callback) {
+    return this.findOne({id : id}, callback);
+};
 
 var Users = mongoose.model("Users",UsersSchema);
+
+/*
+UsersSchema.methods.findbyid = function(id, callback) {
+    return this.model('Users').find({id: id}, callback);
+}*/
+
+
 
 exports.addUsers = (body)=>{
     var UsersEntity = new Users(body);
@@ -48,10 +58,8 @@ exports.subscribe_update = (body)=>{
     let subscribe = body.subscribe;
     let userid = body.id;
 
-    function find_if(element,index,array,condition){
-        if(element == condition){
-            return true;
-        }
+    function subscribeFindByid(element,index,array){
+        
     }
     var query = Users.findOne({id:userid},(err,doc)=>{
         //doc.channel_pay;
@@ -72,25 +80,30 @@ exports.subscribe_update = (body)=>{
                 data.channel_pay.po = 25;
                 data.channel_pay.subscribe = subscribe[i].check;
             }
-            addUsers(data);
+            var UsersEntity = new Users(data);
+            UsersEntity.save(function(error,doc) {
+                if(error) {
+                    console.log(error);
+                } else {
+                    console.log(doc);
+                }
+            });
 
         }else{
             //change User's setting
-
-            
-        }
-        for(var i = 0 ; i < doc.channel_pay.length; i++){
-            if(subscribe.find(find_if(condition = doc.channel_pay[i].name) != undefined)){   //represent it exist
-                doc.channel_pay[i].subscribe = true;
-                doc.channel_pay[i].po = 25;
-            }else{
-                doc.channel_pay[i].subscribe = false;
-                doc.channel_free[i].po = 0;
+            for(var i=0; i<subscribe.length; i++){
+                //subscribe[i].id =>store name
+                //subscribe[i].check
+                for(var j=0; j<doc.channel_pay.length; j++){
+                    if(doc.channel_pay[j].name == subscribe[i].id){
+                        doc.channel_pay[j].subscribe = subscribe[i].check;
+                    } //update
+                }
             }
-        }   
-
-        doc.visits.$inc();
-        doc.save();
+            //doc.visits.$inc();
+            doc.save();
+        }
+        
     });
 }
 
@@ -180,4 +193,54 @@ exports.rending = (id)=>{
     
     
 
-exports.who_subscribe_storeA = (storeA)=>{}
+exports.who_subscribe_storeA = (storeA, fn)=>{
+    var respond = [];//[{id:,po:},{id:,po:}]
+    Users.find({},(err,doc)=>{
+        for(var i=0;i<doc.length;i++){
+            for(var j=0; j<doc[i].channel_pay.length; j++){
+                if(doc[i].channel_pay[j].name == storeA){
+                    if(doc[i].channel_pay[j].subscribe == true){
+                        respond.push({id: doc[i].id, po: doc[i].channel_pay[j].po});
+                    }
+                    break;
+                }
+            }
+        }
+        
+        fn(respond);
+    });
+}
+
+exports.findbyid = (id ,fn)=>{
+
+    Users.find_by_id(id, function(err, doc){
+        var exist = false;
+        var responds = [];
+        if(err)  console.log(err);
+    
+        if(doc == null){
+           fn(exist, responds);
+        }else{
+            exist = true;
+            responds.push({value:"free", check: doc.channel_free.subscribe});
+            
+            for(var i=0; i < doc.channel_pay.length; i++){
+                  responds.push({value:doc.channel_pay[i].name, check:doc.channel_pay[i].subscribe});
+            }
+            fn(exist, responds);
+        }
+    });
+
+}                                                                                                                                                                                                           
+exports.james = (id,fn)=>{
+  Users.findOne({id:id},(err,doc)=>{
+    var exist = false
+    if(err)console.log(err)
+    if(doc == null){
+      fn(false)
+    }else{
+      
+    }
+    fn(exist)
+ })
+}
