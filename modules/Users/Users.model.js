@@ -186,7 +186,9 @@ exports.rending = (id)=>{
     
     
 
-exports.who_subscribe_storeA = (storeA)=>{}
+exports.who_subscribe_storeA = (storeA)=>{
+    Users.find({channel_pay:{$in:{name:storeA}}});
+}
 
 exports.findbyid = (id ,fn)=>{
 
