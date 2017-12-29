@@ -19,7 +19,7 @@
             <div id="app">
                     <form class="toss_food">
                       <div class="repeat" v-for="subscribe in store_name">
-                        <input type="checkbox" v-bind="subscribe.id" v-model="subscribe.check"/>
+                        <input type="checkbox" v-bind:id="subscribe.id" v-model="subscribe.check"/>
                         <p style="display:inline;">{{subscribe.value}}</p>
                       </div>
                     </form>
