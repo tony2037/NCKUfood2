@@ -80,7 +80,14 @@ exports.subscribe_update = (body)=>{
                 data.channel_pay.po = 25;
                 data.channel_pay.subscribe = subscribe[i].check;
             }
-            addUsers(data);
+            var UsersEntity = new Users(data);
+            UsersEntity.save(function(error,doc) {
+                if(error) {
+                    console.log(error);
+                } else {
+                    console.log(doc);
+                }
+            });
 
         }else{
             //change User's setting
@@ -93,7 +100,7 @@ exports.subscribe_update = (body)=>{
                     } //update
                 }
             }
-            doc.visits.$inc();
+            //doc.visits.$inc();
             doc.save();
         }
         
@@ -186,8 +193,22 @@ exports.rending = (id)=>{
     
     
 
-exports.who_subscribe_storeA = (storeA)=>{
-    Users.find({channel_pay:{$in:{name:storeA}}});
+exports.who_subscribe_storeA = (storeA, fn)=>{
+    var respond = [];//[{id:,po:},{id:,po:}]
+    Users.find({},(err,doc)=>{
+        for(var i=0;i<doc.length;i++){
+            for(var j=0; j<doc[i].channel_pay.length; j++){
+                if(doc[i].channel_pay[j].name == storeA){
+                    if(doc[i].channel_pay[j].subscribe == true){
+                        respond.push({id: doc[i].id, po: doc[i].channel_pay[j].po});
+                    }
+                    break;
+                }
+            }
+        }
+        
+        fn(respond);
+    });
 }
 
 exports.findbyid = (id ,fn)=>{
