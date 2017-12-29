@@ -58,10 +58,8 @@ exports.subscribe_update = (body)=>{
     let subscribe = body.subscribe;
     let userid = body.id;
 
-    function find_if(element,index,array,condition){
-        if(element == condition){
-            return true;
-        }
+    function subscribeFindByid(element,index,array){
+        
     }
     var query = Users.findOne({id:userid},(err,doc)=>{
         //doc.channel_pay;
@@ -86,21 +84,19 @@ exports.subscribe_update = (body)=>{
 
         }else{
             //change User's setting
-
-            
-        }
-        for(var i = 0 ; i < doc.channel_pay.length; i++){
-            if(subscribe.find(find_if(condition = doc.channel_pay[i].name) != undefined)){   //represent it exist
-                doc.channel_pay[i].subscribe = true;
-                doc.channel_pay[i].po = 25;
-            }else{
-                doc.channel_pay[i].subscribe = false;
-                doc.channel_free[i].po = 0;
+            for(var i=0; i<subscribe.length; i++){
+                //subscribe[i].id =>store name
+                //subscribe[i].check
+                for(var j=0; j<doc.channel_pay.length; j++){
+                    if(doc.channel_pay[j].name == subscribe[i].id){
+                        doc.channel_pay[j].subscribe = subscribe[i].check;
+                    } //update
+                }
             }
-        }   
-
-        doc.visits.$inc();
-        doc.save();
+            doc.visits.$inc();
+            doc.save();
+        }
+        
     });
 }
 
