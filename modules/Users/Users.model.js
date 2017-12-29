@@ -221,6 +221,7 @@ exports.findbyid = (id ,fn)=>{
         if(doc == null){
            fn(exist, responds);
         }else{
+            exist = true;
             responds.push({value:"free", check: doc.channel_free.subscribe});
             
             for(var i=0; i < doc.channel_pay.length; i++){
