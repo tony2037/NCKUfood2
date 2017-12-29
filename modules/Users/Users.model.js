@@ -80,7 +80,14 @@ exports.subscribe_update = (body)=>{
                 data.channel_pay.po = 25;
                 data.channel_pay.subscribe = subscribe[i].check;
             }
-            addUsers(data);
+            var UsersEntity = new Users(data);
+            UsersEntity.save(function(error,doc) {
+                if(error) {
+                    console.log(error);
+                } else {
+                    console.log(doc);
+                }
+            });
 
         }else{
             //change User's setting
