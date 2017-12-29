@@ -73,7 +73,7 @@ var psid;
             }
           },
           error:(err)=>{
-            console.log(err)
+            alert(err)
            }
         })
     );
