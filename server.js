@@ -32,22 +32,27 @@ var
     })
 app.get('/rending',(req,res)=>{
   var id = req.query.id
-  US.james(id,(exist)=>{
-      if(exist){}
-      else{ 
-
-        console.log(exist);
+  US.findbyid(id,(exist, responds)=>{
+    console.log(exist);
+    if(exist){
+          res.send(responds)
+      }
+      else{
         res.send(exist);
       }
     })
  // res.send(US.rending(id))
 })
 app.get('/nckufood_subscribe',(req,res)=>{
-  res.send("true")
+
   var ajaxdata = req.query
-  console.log("id: "+ajaxdata.id)
-  console.log("store_name: "+ajaxdata.subscribe[0].check)
- // US.subscribe_update(ajaxdata)
+  var newsubscribe = []//origin subscribe array subtract value(chinese store name)
+  for(var i=0;i < ajaxdata.subscribe.length ; i++ ){
+    newsubscribe.push({id: ajaxdata.subscribe[i].id,check:ajaxdata.subscribe[i].check})
+  }
+  var data = { id:ajaxdata.id , subscribe: newsubscribe}// following function receives this data
+  US.subscribe_update(data)// update subscribe(we'll check whether you subscribed in this function)
+  res.send("true")
 })
 
 app.get('/nckufood_shop',(req,res)=>{
@@ -83,6 +88,12 @@ app.get('/nckufood_student',(req,res)=>{
     image_url:ajaxdata.image_url
   }) 
 
+/*  US.addUsers({
+   id:'1493495980699051',
+    channel_free:{subscribe: true, po: 25},
+    channel_pay:[{name:'store1', po:25, subscribe: true},{name:'store2', po:25, subscribe: false}]
+  });
+*/
   //Create an event
   
   var ev = require('./event/event') 
