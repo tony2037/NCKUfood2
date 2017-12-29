@@ -62,7 +62,7 @@ var psid;
           },
           dataType:'json',
           success :(data)=>{
-            if(data === false){alert('hi new bitch')}
+            if(data === false){alert(data)}
             else {
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
@@ -73,7 +73,7 @@ var psid;
             }
           },
           error:(err)=>{
-            console.log(err)
+            alert(err)
            }
         })
     );
