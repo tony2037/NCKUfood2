@@ -51,6 +51,8 @@ app.get('/nckufood_subscribe',(req,res)=>{
     newsubscribe.push({id: ajaxdata.subscribe[i].id,check:ajaxdata.subscribe[i].check})
   }
   var data = { id:ajaxdata.id , subscribe: newsubscribe}// following function receives this data
+  console.log(data);
+//  console.log("sss:"+data.subscribe[0].check)
   US.subscribe_update(data)// update subscribe(we'll check whether you subscribed in this function)
   res.send("true")
 })

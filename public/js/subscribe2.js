@@ -64,6 +64,7 @@ var psid;
           success :(data)=>{
             if(data === false){alert('hi new bitch')}
             else {
+            alert("hihi")
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
                   if(data[i].id === subscribe_data[j].id) subscribe_data[j].check = data[i].check
