@@ -13,6 +13,20 @@ body{
     margin:10px;
     border-radius: 10px;
 }
+#loading{
+    color:white;
+    background-color: rgb(234, 127, 255);
+    padding:5px;
+    margin:10px;
+    border-radius: 10px;
+}
+#empty{
+    color:white;
+    background-color: rgb(255, 127, 127);
+    padding:5px;
+    margin:10px;
+    border-radius: 10px;
+}
 .msg{
     text-align: center;
     height: 50%;

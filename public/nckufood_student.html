@@ -12,26 +12,29 @@
 </head>
 
 <body>
-<body>
-    <div class="msg">
-    <h1 id="title">學生投食<h1>
-    <h2 id="info">投食成功！</h2>
-    <form class="toss_food">
-        <p>請填食物名稱</p><input type='text' name='food_name' placeholder="Enter food name">
-        <p>請填食物數量</p><input type='text' name='food_number' placeholder="Enter food number">
-        <p>可等待時間（小時）</p><input type='text' name='deadline' placeholder="Enter deadline">
-        <p>地點（位置）</p><input type='text' name='location' placeholder="Enter location">
-      
-
-    </form>
+    <div id="app">
+        <div class="msg">
+            <h1 id="title">學生投食<h1>
+            <h2 id="info">投食成功！</h2>
+            <h2 id="loading">Loading...</h2>
+            <h2 id="empty">請填滿所有空格！</h2>
+            <form class="toss_food">
+                <p>請填食物名稱</p><input type='text' v-model="input.name" name='food_name' placeholder="Enter food name">
+                <p>請填食物數量</p><input type='text' v-model="input.number"name='food_number' placeholder="Enter food number">
+                <p>可等待時間（小時）</p><input type='text' v-model="input.deadline"name='deadline' placeholder="Enter deadline">
+                <p>地點（位置）</p><input type='text' v-model="input.location"name='location' placeholder="Enter location">
+            </form>
     <!--<a id="samplelink" href="#" class="btn btn-info" role="button" onclick="closeView()">Close ME</a>-->
+        </div>
     </div>
+
     <div class="dropzone"><div class="info"></div></div>
     <div class="button">
     <a class="action-button shadow animate blue" id="btn" type="submit" >送出</a>
     </div>
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
     <script type="text/javascript" src="./js/imgur.js"></script>
     <script type="text/javascript" src="./js/nckufood_student.js"></script>
 </body>
