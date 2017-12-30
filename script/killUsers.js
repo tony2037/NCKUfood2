@@ -5,6 +5,6 @@ db.start();
 
 const US = require('../modules/Users/Users.model');
 
-console.log('====start check out collections : Users ....');
+console.log('====start Kill collections : Users ....');
 
-US.list_Users();
+US.killUsers();
