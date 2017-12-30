@@ -69,17 +69,23 @@ exports.subscribe_update = (body)=>{
             //new User
             console.log("New User ... add to collection");
             var data = {
+                id: '',
+                channel_free:{subscribe: false,po:0},
+                channel_pay: []
+                };
+
+            /*
+            data = {
                 id: String,
                 channel_free:{subscribe: Boolean,po:Number,},
                 channel_pay: [{name:String, po: Number, subscribe: Boolean}]
-                };
+                }
+            */
             data.id = userid;
             data.channel_free.subscribe = subscribe[0].check;
             data.channel_free.po = 25;
             for(var i=1; i< subscribe.length; i++){
-                data.channel_pay.name = subscribe[i].id;
-                data.channel_pay.po = 25;
-                data.channel_pay.subscribe = subscribe[i].check;
+                data.channel_pay.push({name:subscribe[i].id, po:25, subscribe: subscribe[i].check});
             }
             var UsersEntity = new Users(data);
             UsersEntity.save(function(error,doc) {
