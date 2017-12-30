@@ -64,10 +64,14 @@ var psid;
           success :(data)=>{
             if(data === false){alert(data)}
             else {
+            alert("hihi")
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
-                  if(data[i].id === subscribe_data[j].id) subscribe_data[j].check = data[i].check
-                }
+                    alert(j + ":" +data[j].check)
+                  if(data[i].id === subscribe_data[j].id){
+                    subscribe_data[j].check = data[i].check
+                    alert(j + ":" + subscribe_data[j].check)}
+               }
               }
               
             }
