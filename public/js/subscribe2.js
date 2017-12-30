@@ -62,15 +62,12 @@ var psid;
           },
           dataType:'json',
           success :(data)=>{
-            if(data === false){alert(data)}
+            if(data === false){}
             else {
-            alert("hihi")
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
-                  alert("datadata[i].value",data[i].value)
                   if(data[i].value === subscribe_data[j].id){
                     subscribe_data[j].check = data[i].check
-                    alert(data[i].check + ":" + subscribe_data[j].check)}
                }
               }
               
