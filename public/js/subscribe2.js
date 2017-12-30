@@ -67,7 +67,8 @@ var psid;
             alert("hihi")
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
-                  if(data[i].id === subscribe_data[j].id){
+                  alert("datadata[i].value",data[i].value)
+                  if(data[i].value === subscribe_data[j].id){
                     subscribe_data[j].check = data[i].check
                     alert(data[i].check + ":" + subscribe_data[j].check)}
                }
