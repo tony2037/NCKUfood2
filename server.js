@@ -36,7 +36,8 @@ app.get('/rending',(req,res)=>{
     console.log(exist);
     if(exist){
           res.send(responds)
-      }
+          console.log(responds)
+    }
       else{
         res.send(exist);
       }
