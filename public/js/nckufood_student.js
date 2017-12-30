@@ -15,11 +15,25 @@ new Imgur({
     callback: feedback 
 });
 
+var student_input={
+    name:"",
+    number:"",
+    deadline:"",
+    location:""
+}
 
+var app=new Vue({
+    el:'#app',
+    data :{
+        input:student_input
+    }
+})
 
 
 var psid;
     $('#info').hide();
+    $('#empty').hide();
+    $('#loading').hide();
     var strUrl = location.search;
     var getPara, ParaVal;
     var aryPara = [];
@@ -39,24 +53,36 @@ var psid;
     $('#btn').on('click',(e)=>{
       e.preventDefault();
       console.log("dd");
-      $.ajax({
-        url : "../nckufood_student",
-        method :"GET",
-        data : {
-          id: psid ,
-          food_name:$("input[name=food_name]").val(),
-          food_number:$("input[name=food_number]").val(),
-          deadline:$("input[name=deadline]").val(),
-          location:$("input[name=location]").val(),
-          image_url: wahaha
-        },
-        dataType:'json',
+        if (student_input.deadline == "" || student_input.location == "" || student_input.name == "" || student_input.number == "") {
+            $('#empty').show();
+            $('#loading').hide();
+        }
+        else {
+            $.ajax({
+                url: "../nckufood_student",
+                method: "GET",
+                data: {
+                    id: psid,
+                    food_name: $("input[name=food_name]").val(),
+                    food_number: $("input[name=food_number]").val(),
+                    deadline: $("input[name=deadline]").val(),
+                    location: $("input[name=location]").val(),
+                    image_url: wahaha
+                },
+                dataType: 'json',
 
-        success :(data)=>{
-          $('#info').toggle();
-        },
-        error:()=>{
-         }
-      });
-
+                success: (data) => {
+                    $('#info').toggle();
+                    $('#empty').hide();
+                    $('#loading').show();
+                    $('#btn').html('送出');
+                },
+                error: () => {
+                }
+            });
+            $('#loading').show();
+            $('#empty').hide();
+            $('#btn').html('正在傳送...');
+        }
+        
     });
