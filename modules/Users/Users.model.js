@@ -67,6 +67,7 @@ exports.subscribe_update = (body)=>{
 
         if(doc == null){
             //new User
+            console.log("New User ... add to collection");
             var data = {
                 id: String,
                 channel_free:{subscribe: Boolean,po:Number,},
