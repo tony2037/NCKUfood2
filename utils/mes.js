@@ -1,6 +1,8 @@
 const 
   fb = require('../fb'),
   Subtract = require('array-subtract')  //用於兩個矩陣相減
+  tem = require("fb-messenger")
+  var k = new tem(fb.page_token)
 module.exports = {
   sendfood :(ajaxdata)=>{
     return {
@@ -91,7 +93,9 @@ module.exports = {
       }
 		}
 		else if(webhook_event.message){
-		  fb.handleMessage(sender_psid, webhook_event.message,"") 
+		  fb.handleMessage(sender_psid, webhook_event.message,"")
+      k.sendTextMessage(sender_psid,"fuck")
+      console.log("run");
 		}
     else if(webhook_event.postback){
 	    fb.handlePostback(sender_psid, webhook_event.postback) 

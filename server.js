@@ -27,19 +27,19 @@ var
   ca = fs.readFileSync(__dirname + '/ssl/ca_bundle.crt'),
   credentials = { key: privateKey, cert: certificate, ca: ca } 
 //打開 https port 
-  https.createServer(credentials, app).listen(17487, function () {
+  https.createServer(credentials, app).listen(17486, function () {
     
     })
 app.get('/rending',(req,res)=>{
   var id = req.query.id
   US.findbyid(id,(exist, responds)=>{
     console.log(exist);
-    if(exist){
+    if(exist === true){
           res.send(responds)
-          console.log(responds)
     }
-      else{
+      else if(exist === false){
         res.send(exist);
+
       }
     })
  // res.send(US.rending(id))
@@ -52,7 +52,6 @@ app.get('/nckufood_subscribe',(req,res)=>{
     newsubscribe.push({id: ajaxdata.subscribe[i].id,check:ajaxdata.subscribe[i].check})
   }
   var data = { id:ajaxdata.id , subscribe: newsubscribe}// following function receives this data
-  console.log(data);
 //  console.log("sss:"+data.subscribe[0].check)
   US.subscribe_update(data)// update subscribe(we'll check whether you subscribed in this function)
   res.send("true")
@@ -71,10 +70,14 @@ app.get('/nckufood_student',(req,res)=>{
   var multi_rate =5 
   
   //從db抓下來
-  var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
-  var candidate_probability = [0.2,0.2,0.2,0.2,0.2] 
+ // var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
+ // var candidate_probability = [0.2,0.2,0.2,0.2,0.2] 
+ //US.who_subscribe_storeA() 
  
-  var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
+ 
+
+ // var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
+ 
   var myloveobj = {
       id: ajaxdata.id,
       selectedPeople : selectedPeople
@@ -91,12 +94,6 @@ app.get('/nckufood_student',(req,res)=>{
     image_url:ajaxdata.image_url
   }) 
 
-/*  US.addUsers({
-   id:'1493495980699051',
-    channel_free:{subscribe: true, po: 25},
-    channel_pay:[{name:'store1', po:25, subscribe: true},{name:'store2', po:25, subscribe: false}]
-  });
-*/
   //Create an event
   
   var ev = require('./event/event') 
@@ -114,6 +111,7 @@ app.get('/nckufood_student',(req,res)=>{
   var ev_element = Object.assign({},ev) 
   global.EVENTS.push(ev_element) 
 //Create an event
+
   var sendfood = mes.sendfood(ajaxdata)
   var tossfooder = mes.tossfooder(ajaxdata)
   for(var i=0; i < ev.promotion.length;i++){

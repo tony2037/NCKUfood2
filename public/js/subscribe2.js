@@ -66,7 +66,7 @@ var psid;
             else {
               for(var i=0;i<data.length;i++){
                 for(var j=0;j<subscribe_data.length;j++){
-                  if(data[i].value === subscribe_data[j].id){
+                  if(data[i].value === subscribe_data[j].id)
                     subscribe_data[j].check = data[i].check
                }
               }

@@ -1,7 +1,8 @@
-
+const Messenger = require('fb-messenger')
+var messenger = new Messenger("EAAcxmUJrycABAHHFAUZCDd9mJjUJv6jQmvyhrKHzw5PZBfADNdI9H6aiY9JX5oowyGzOWvhb1hHMetpUjR0ItORNjnyPSpZAVwkyITfk7dKk5QnAJJopHh35gBfUWZBtCVHGduSfZCS3GW1gYmVRumqv4reETqrztZBmA3uaVfcZChB43rF5MHh")
 var request = require("request");
 var fb ={
-  page_token:"EAAUm009elZBoBABmWMK1kZBCjudub4ktE4HZAdPeIYmqlhx0suSQDEjZAkrUGLMhfMjuwhWQgTUfnVmcpSHuIe5Ocnh6zM8bt39UIwes7hybzVhxiTpTt1j6cVNa4OKZAhZBPX3v7Saa9ZARnTUI6aKHndjIU0gsjY0Wnn3aZBMrwF0kvF0ov0eK",
+  page_token:"EAAcxmUJrycABACIGmtnO4NgDfqMtZBy5nAFRkp9UDOsXOnMymEoc3ZBZAx62Mlf6YT0OrfNuBcuFcBBaA1aqEn4xXdwR7Cx2FDcjQVFFJiZAeZBwDabGx9Skto1tx9P6mwEoBBppCxwAvvfCg53sty7fx6Wx3BnKbjKldFH0xAoHQ4C3X9iZAW",
   handleMessage:function(sender_psid, received_message,other_response){
     let response;
     if(received_message.text && !other_response){
@@ -44,8 +45,10 @@ var fb ={
             }]
           }
         }
-      }  
-     fb.callSendAPI(sender_psid, response);
+      } 
+
+     fb.callSendAPI(sender_psid, response); 
+
     }
     else{
       fb.callSendAPI(sender_psid,other_response);
@@ -70,7 +73,8 @@ var fb ={
   },
   callSendAPI:function(sender_psid, response){
     let request_body = {
-      "recipient":  {
+      "messaging_type": "RESPONSE",
+     "recipient":  {
         "id":sender_psid
       },
       "message": response
