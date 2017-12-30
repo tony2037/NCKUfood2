@@ -63,10 +63,10 @@ var psid;
                 method: "GET",
                 data: {
                     id: psid,
-                    food_name: $("input[name=food_name]").val(),
-                    food_number: $("input[name=food_number]").val(),
-                    deadline: $("input[name=deadline]").val(),
-                    location: $("input[name=location]").val(),
+                    food_name: student_input.name,
+                    food_number: student_input.number,
+                    deadline: student_input.deadline,
+                    location: student_input.location,
                     image_url: wahaha
                 },
                 dataType: 'json',

@@ -21,7 +21,16 @@
             <form class="toss_food">
                 <p>請填食物名稱</p><input type='text' v-model="input.name" name='food_name' placeholder="Enter food name">
                 <p>請填食物數量</p><input type='text' v-model="input.number"name='food_number' placeholder="Enter food number">
-                <p>可等待時間（小時）</p><input type='text' v-model="input.deadline"name='deadline' placeholder="Enter deadline">
+                <p>可等待時間(分鐘)</p>
+                <select v-model="input.deadline">
+                  <option> 10分以內</option>
+                  <option> 20分以內</option>
+                  <option> 30分以內</option>
+                  <option> 40分以內</option>
+                  <option> 50分以內</option>
+                  <option> 60分以內</option>
+                  <option> 都可以</option>
+                </select>
                 <p>地點（位置）</p><input type='text' v-model="input.location"name='location' placeholder="Enter location">
             </form>
     <!--<a id="samplelink" href="#" class="btn btn-info" role="button" onclick="closeView()">Close ME</a>-->
