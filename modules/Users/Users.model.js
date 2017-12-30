@@ -247,7 +247,7 @@ exports.james = (id,fn)=>{
 
 exports.killUsers = ()=>{
     Users.remove({},(err)=>{
-        onsole.log('---kill Users ---------------------------------------');
+        console.log('---kill Users ---------------------------------------');
         if (err) {
             console.log('Users remove all occur a error:', err);
         } else {
