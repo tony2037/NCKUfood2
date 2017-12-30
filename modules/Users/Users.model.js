@@ -245,7 +245,7 @@ exports.james = (id,fn)=>{
  })
 }
 
-expots.killUsers = ()=>{
+exports.killUsers = ()=>{
     Users.remove({},(err)=>{
         onsole.log('---kill Users ---------------------------------------');
         if (err) {
