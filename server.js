@@ -1,5 +1,6 @@
 'use strict' 
 const
+  ev = require('./event/event'), 
   Subtract = require('array-subtract'),  //用於兩個矩陣相減
   https = require('https'), //用於打開https port
   fs = require('fs'), //讀檔案模組
@@ -8,6 +9,7 @@ const
   app = express().use(bodyParser.json()),
   fb = require('./fb'), 
   func = require('./modules/Users/function'),
+  probability = require('./modules/Users/probability'),
   FBMessenger = require('fb-messenger'),
   db = require('./db/connect'),
   STU = require('./modules/Students/Students.model'),
@@ -66,59 +68,55 @@ app.get('/nckufood_shop',(req,res)=>{
 app.get('/nckufood_student',(req,res)=>{
   res.send('{"status":"success"}')  
   var ajaxdata = req.query 
-  var food_num = 1 
-  var multi_rate =5 
   
   //從db抓下來
- // var ori_candidate_people = ["1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
+ // var ori_candidate_people = ["1724602970946499","1493495980699051","1522796911138184","1485510774829902","1553340364755635","1983767974968546"] 
  // var candidate_probability = [0.2,0.2,0.2,0.2,0.2] 
- //US.who_subscribe_storeA() 
- 
- 
+  US.who_subscribe_storeA("free",(ori_candidate_people)=>{
+    console.log('ori')
+    console.log(ori_candidate_people)
 
- // var selectedPeople = func.selected_people(food_num, multi_rate, ori_candidate_people, candidate_probability)
- 
-  var myloveobj = {
-      id: ajaxdata.id,
-      selectedPeople : selectedPeople
-   } 
-  var json = JSON.stringify(myloveobj) 
-  fs.writeFile('log.json', json, 'utf8') 
+     var selectedPeople =  probability(ori_candidate_people,ajaxdata.food_number,2)
+    console.log('select')
+    console.log(selectedPeople)
+   
+      STU.addStudents({
+        id:ajaxdata.id,
+        food_name:ajaxdata.food_name,
+        food_number:ajaxdata.food_number,
+        deadline:ajaxdata.deadline,
+        location:ajaxdata.location,
+        image_url:ajaxdata.image_url
+      }) 
 
-  STU.addStudents({
-    id:ajaxdata.id,
-    food_name:ajaxdata.food_name,
-    food_number:ajaxdata.food_number,
-    deadline:ajaxdata.deadline,
-    location:ajaxdata.location,
-    image_url:ajaxdata.image_url
-  }) 
+      //Create an event
+      
 
-  //Create an event
-  
-  var ev = require('./event/event') 
-  ev.event({
-    id:ajaxdata.id,
-    food_name:ajaxdata.food_name,
-    food_number:ajaxdata.food_number,
-    deadline:ajaxdata.deadline,
-    location:ajaxdata.location,
-    image_url:ajaxdata.image_url,
-    promotion : selectedPeople,
-    who_say_yes:[],
-    who_say_no:[]
-  }) 
-  var ev_element = Object.assign({},ev) 
-  global.EVENTS.push(ev_element) 
-//Create an event
+      ev.event({
+        id:ajaxdata.id,
+        food_name:ajaxdata.food_name,
+        food_number:ajaxdata.food_number,
+        deadline:ajaxdata.deadline,
+        location:ajaxdata.location,
+        image_url:ajaxdata.image_url,
+        promotion : selectedPeople,
+        who_say_yes:[],
+        who_say_no:[]
+      }) 
+      var ev_element = Object.assign({},ev) 
+      global.EVENTS.push(ev_element) 
+    //Create an event
 
-  var sendfood = mes.sendfood(ajaxdata)
-  var tossfooder = mes.tossfooder(ajaxdata)
-  for(var i=0; i < ev.promotion.length;i++){
-    fb.handleMessage(ev.promotion[i],"",sendfood) 
-  }
-  fb.handleMessage(ev.id,"",tossfooder) 
-   // fb.handleMessage(myloveobj.id,"",tossfooder) 
+      var sendfood = mes.sendfood(ajaxdata)
+      var tossfooder = mes.tossfooder(ajaxdata)
+      for(var i=0; i < ev.promotion.length;i++){
+        fb.handleMessage(ev.promotion[i],"",sendfood)
+        console.log("發食物給 " + ev.promotion[i] + "!")
+      }
+      fb.handleMessage(ev.id,"",tossfooder) 
+       // fb.handleMessage(myloveobj.id,"",tossfooder)
+  })
+
 }) 
 
 

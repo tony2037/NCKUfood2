@@ -12,7 +12,7 @@ module.exports = {
             "template_type": "generic",
             "elements":[{
               "title":"【食物快遞】現在有人贈送免費的" + ajaxdata.food_name + "是否去拿?",
-              "subtitle":"食物數量:"+ ajaxdata.food_number + "\n地址:"+ ajaxdata.location + "\n請在" + ajaxdata.deadline +"小時前來拿",
+              "subtitle":"食物數量:"+ ajaxdata.food_number + "\n地址:"+ ajaxdata.location + "\n請在" + ajaxdata.deadline +"來拿",
               "image_url": ajaxdata.image_url,
               "buttons":[
                 {
@@ -37,7 +37,7 @@ module.exports = {
           "type": "template",
           "payload":{
             "template_type": "button",
-            "text":"如果食物順利發完，或者不想發了，請記得按【發完了】，謝謝！",
+            "text":"如果" + ajaxdata.food_name + "順利發完，或者不想發了，請記得按【發完了】，謝謝！",
             "buttons":[
                 {
                   "type":"postback",
@@ -76,7 +76,7 @@ module.exports = {
 				for(var i = 0 ; i <  EVENTS.length ; i++){
 					if( EVENTS[i].id === get[1] &&  EVENTS[i].food_name === get[2]){
 						 EVENTS[i].who_say_yes.push(sender_psid)  
-						 fb.handleMessage(sender_psid,"",{"text":"you say yes"}) 
+						 fb.handleMessage(sender_psid,"",{"text":"快去拿喔~沒了就只能ㄅ欠@@"}) 
 					}
 				}
 			}
@@ -84,7 +84,7 @@ module.exports = {
 				for(var i = 0 ; i <  EVENTS.length ; i++){
 					if( EVENTS[i].id === get[1] &&  EVENTS[i].food_name === get[2]){
 						 EVENTS[i].who_say_no.push(sender_psid) 
-						 fb.handleMessage(sender_psid,"",{"text":"you say no"}) 
+						 fb.handleMessage(sender_psid,"",{"text":"ㄅㄅ囉~好拉下一次還是會跟你說"}) 
 				  }
 			  }
 			}
@@ -94,8 +94,8 @@ module.exports = {
 		}
 		else if(webhook_event.message){
 		  fb.handleMessage(sender_psid, webhook_event.message,"")
-      k.sendTextMessage(sender_psid,"fuck")
-      console.log("run");
+  //    k.sendTextMessage(sender_psid,"fuck")
+   //   console.log("run");
 		}
     else if(webhook_event.postback){
 	    fb.handlePostback(sender_psid, webhook_event.postback) 

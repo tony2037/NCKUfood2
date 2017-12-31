@@ -24,7 +24,7 @@ var fb ={
                   "messenger_extensions": true,
                   "webview_share_button": "hide",
                 },
-                {
+               /* {
                   "type":"web_url",
                   "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/nckufood_shop.html?psid=" + sender_psid ,
                   "title":"店家投食",
@@ -32,7 +32,7 @@ var fb ={
                   "messenger_extensions": true,
                   "webview_share_button": "hide",
                 },
-                
+                */
                 {
                   "type":"web_url",
                   "url":"https://luffy.ee.ncku.edu.tw/~luben3485/nckufood2.0webpage/nckufood_student.html?psid=" + sender_psid ,
