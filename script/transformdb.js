@@ -324,3 +324,5 @@ for(var i=0; i<users_be_trans.length; i++){
         channel_pay:[{name:'store1', po:25, subscribe: false},{name:'store2', po: 25, subscribe: false}]
     });
 }
+
+console.log("=========transform success=========");
