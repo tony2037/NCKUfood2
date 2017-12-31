@@ -76,7 +76,7 @@ var psid;
                 success: (data) => {
                     $('#info').toggle();
                     $('#empty').hide();
-                    $('#loading').show();
+                    $('#loading').hide();
                     $('#btn').html('送出');
                 },
                 error: () => {
