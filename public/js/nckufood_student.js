@@ -83,6 +83,7 @@ var psid;
                     $('#empty').hide();
                     $('#loading').hide();
                     $('#btn').html('送出');
+                    window.location("https://www.messenger.com/closeWindow/?display_text=投食成功")
                 },
                 error: () => {
                 }
