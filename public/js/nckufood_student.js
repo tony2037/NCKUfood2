@@ -1,4 +1,5 @@
 var wahaha; 
+var is_image = false;
 var feedback = function(res) {
      if (res.success === true) {
          wahaha = res.data.link.replace("http","http");
@@ -6,6 +7,7 @@ var feedback = function(res) {
         //document.querySelector('.status').innerHTML = 
         //'Image : ' + '<br><input class="image-url" value=' + wahaha + '/>' + //'<img class="img" src=' + wahaha + '/>';
         $('.dropzone').find("p").text("照片上傳成功！");
+        is_image = true;
     }
     
  };
@@ -58,6 +60,9 @@ var psid;
         }
         else if (!parseInt(student_input.number)){
           alert("食物數量請輸入阿拉伯數字整數")
+        }
+        else if (!is_image){
+          alert("沒圖沒真相")
         }
         else {
             $.ajax({
