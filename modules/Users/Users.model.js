@@ -204,14 +204,13 @@ exports.rending = (id)=>{
 exports.who_subscribe_storeA = (storeA, fn)=>{
     var respond = [];//[{id:,po:},{id:,po:}]
     Users.find({},(err,doc)=>{
-        console.log(doc);
+        //console.log(doc);
         for(var i=0;i<doc.length;i++){
             if(storeA == 'free'){
                 //Find out who want free channel
                 if(doc[i].channel_free.subscribe){
                     respond.push({id:doc[i].id, po: doc[i].channel_free.po});
                 }
-                break;
             }else{
                 for(var j=0; j<doc[i].channel_pay.length; j++){
                     if(doc[i].channel_pay[j].name == storeA  && doc[i].channel_pay[j].subscribe == true){
