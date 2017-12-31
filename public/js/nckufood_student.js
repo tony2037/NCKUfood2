@@ -1,4 +1,5 @@
-var wahaha; 
+var wahaha;
+var send = true;
 var is_image = false;
 var feedback = function(res) {
      if (res.success === true) {
@@ -65,6 +66,7 @@ var psid;
           alert("沒圖沒真相")
         }
         else {
+          if(send){
             $.ajax({
                 url: "../nckufood_student",
                 method: "GET",
@@ -83,7 +85,8 @@ var psid;
                     $('#empty').hide();
                     $('#loading').hide();
                     $('#btn').html('送出');
-                    window.location("https://www.messenger.com/closeWindow/?display_text=投食成功")
+                    $("#btn").fadeTo( "fast", 0.33 )
+                    send = false
                 },
                 error: () => {
                 }
@@ -92,5 +95,5 @@ var psid;
             $('#empty').hide();
             $('#btn').html('正在傳送...');
         }
-        
+      }
     });
