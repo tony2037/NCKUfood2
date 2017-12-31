@@ -98,7 +98,8 @@ exports.subscribe_update = (body)=>{
 
         }else{
             //change User's setting
-            for(var i=0; i<subscribe.length; i++){
+            doc.channel_free.subscribe = subscribe[0].check;
+            for(var i=1; i<subscribe.length; i++){
                 //subscribe[i].id =>store name
                 //subscribe[i].check
                 for(var j=0; j<doc.channel_pay.length; j++){
