@@ -220,7 +220,7 @@ exports.who_subscribe_storeA = (storeA, fn)=>{
                 } 
             }            
         }
-        
+        console.log(respond);
         fn(respond);
     });
 }
@@ -266,6 +266,18 @@ exports.killUsers = ()=>{
             console.log('Users remove all occur a error:', err);
         } else {
             console.log('Users remove all success.');
+        }
+    });
+}
+
+exports.whenWeGetNewStore = ()=>{
+    var numOfStores = 0;
+    Users.find({},(err, docs)=>{
+        for(var i=0; i<docs.length; i++){
+            if(i == 0){
+                numOfStores = docs[i].channel_pay.length;
+            }
+
         }
     });
 }
