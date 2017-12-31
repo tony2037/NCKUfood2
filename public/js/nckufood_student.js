@@ -56,7 +56,7 @@ var psid;
             $('#empty').show();
             $('#loading').hide();
         }
-        else if (parseInt(student_input.number) === NaN){
+        else if (!parseInt(student_input.number)){
           alert("食物數量請輸入阿拉伯數字整數")
         }
         else {
