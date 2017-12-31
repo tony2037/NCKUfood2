@@ -66,7 +66,7 @@ var psid;
                 data: {
                     id: psid,
                     food_name: student_input.name,
-                    food_number: parseInt(student_input.number)
+                    food_number: parseInt(student_input.number),
                     deadline: student_input.deadline,
                     location: student_input.location,
                     image_url: wahaha
