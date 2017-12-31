@@ -52,10 +52,12 @@ var psid;
 
     $('#btn').on('click',(e)=>{
       e.preventDefault();
-      console.log("dd");
         if (student_input.deadline == "" || student_input.location == "" || student_input.name == "" || student_input.number == "") {
             $('#empty').show();
             $('#loading').hide();
+        }
+        else if (parseInt(student_input.number) === NaN){
+          alert("食物數量請輸入阿拉伯數字整數")
         }
         else {
             $.ajax({
@@ -64,7 +66,7 @@ var psid;
                 data: {
                     id: psid,
                     food_name: student_input.name,
-                    food_number: student_input.number,
+                    food_number: parseInt(student_input.number),
                     deadline: student_input.deadline,
                     location: student_input.location,
                     image_url: wahaha

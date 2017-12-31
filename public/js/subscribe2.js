@@ -17,9 +17,9 @@ var psid;
       psid = aryPara.psid;
     }
     var subscribe_data = [
-      {"id":'free',"value":'學生投食',"check":false},
-      {"id":'store1',"value":'張景雲小吃店',"check":false},
-      {"id":'store2',"value":'宥辰撈撈面',"check":false}
+      {"id":'free',"value":'學生投食',"check":false}
+     // {"id":'store1',"value":'張景雲小吃店',"check":false},
+    //  {"id":'store2',"value":'宥辰撈撈面',"check":false}
     ]
     var app = new Vue({
       el:'#app',
@@ -45,12 +45,12 @@ var psid;
                 }
                 else{
                   alert("訂閱失敗")
-                  console.log(err)
+           //       console.log(err)
                 }
               },
               error:(err)=>{
                   alert("訂閱失敗")
-                  console.log(err)
+            //      console.log(err)
                }
             });
         }),
