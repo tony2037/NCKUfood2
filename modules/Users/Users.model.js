@@ -208,7 +208,7 @@ exports.who_subscribe_storeA = (storeA, fn)=>{
             if(storeA == 'free'){
                 //Find out who want free channel
                 if(doc[i].channel_free.subscribe){
-                    responds.push({id:doc[i].id, po: doc[i].channel_free.po});
+                    respond.push({id:doc[i].id, po: doc[i].channel_free.po});
                 }
                 break;
             }else{
@@ -272,12 +272,24 @@ exports.killUsers = ()=>{
 
 exports.whenWeGetNewStore = ()=>{
     var numOfStores = 0;
+    var newStoreName = '';
     Users.find({},(err, docs)=>{
         for(var i=0; i<docs.length; i++){
             if(i == 0){
                 numOfStores = docs[i].channel_pay.length;
+                newStoreName = 'store' + numOfStores.toString();
             }
+            console.log("We now have  "+ numOfStores + " in cooperation");
+            console.log("New store's name ...." + newStoreName);
+            if(i!=0 && numOfStores != docs[i].channel_pay.length){
+                console.log("Data error : Different number of stores in each User");
+                process.exit();
+            }
+            //From here we got new store's name
 
+            docs[i].channel_pay.push({name: newStoreName, po: 25, subscribe: false});
+
+            docs[i].save();
         }
     });
 }
