@@ -205,6 +205,7 @@ exports.who_subscribe_storeA = (storeA, fn)=>{
     var respond = [];//[{id:,po:},{id:,po:}]
     Users.find({},(err,doc)=>{
         for(var i=0;i<doc.length;i++){
+            console.log("User" + i);
             if(storeA == 'free'){
                 //Find out who want free channel
                 if(doc[i].channel_free.subscribe){
