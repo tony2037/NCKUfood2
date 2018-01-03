@@ -1,8 +1,7 @@
-const Messenger = require('fb-messenger')
-var messenger = new Messenger("EAAbHXRREfRsBABuuCydUgACeLVUB8AkzSIVUKRw0ZC1lVMEgLofbn2Rg0HoJMTO6dP9qzLTKkVZAlgGlxk3UpMYKAXMj9bjO9J2xc24CZCoTomCDp4RoEEdwdc9wL3vZAoZBzMBNZCJs8qUIkZCLZAEZAbGzv3PIhvch1TFtsCsChVLf4j7bNOi8s")
+const config = require('./config.js')
 var request = require("request");
 var fb ={
-  page_token:"EAAbHXRREfRsBABuuCydUgACeLVUB8AkzSIVUKRw0ZC1lVMEgLofbn2Rg0HoJMTO6dP9qzLTKkVZAlgGlxk3UpMYKAXMj9bjO9J2xc24CZCoTomCDp4RoEEdwdc9wL3vZAoZBzMBNZCJs8qUIkZCLZAEZAbGzv3PIhvch1TFtsCsChVLf4j7bNOi8s",
+  page_token:config.token,
   handleMessage:function(sender_psid, received_message,other_response){
     let response;
     if(received_message.text && !other_response){

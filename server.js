@@ -15,8 +15,8 @@ const
   STU = require('./modules/Students/Students.model'),
   mes = require('./utils/mes'),
   messenger = new FBMessenger(fb.page_token),
-  US = require('./modules/Users/Users.model')
-
+  US = require('./modules/Users/Users.model'),
+  config = require('./config')
 var subtract = new Subtract((a, b) => { return a === b })
 // 連上db
 db.start()
@@ -29,7 +29,7 @@ var
   ca = fs.readFileSync(__dirname + '/ssl/ca_bundle.crt'),
   credentials = { key: privateKey, cert: certificate, ca: ca } 
 //打開 https port 
-  https.createServer(credentials, app).listen(17486, function () {
+  https.createServer(credentials, app).listen(config.port, function () {
     
     })
 app.get('/rending',(req,res)=>{
