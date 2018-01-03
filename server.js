@@ -76,7 +76,7 @@ app.get('/nckufood_student',(req,res)=>{
     console.log('ori')
     console.log(ori_candidate_people)
 
-     var selectedPeople =  probability(ori_candidate_people,ajaxdata.food_number,2)
+     var selectedPeople =  probability(ori_candidate_people,ajaxdata.food_number,5)
     console.log('select')
     console.log(selectedPeople)
    
