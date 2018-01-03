@@ -3,7 +3,7 @@
 //const db = require("./db/connect")
 //db.start()
 const mongoose = require('mongoose');
-const dbConfig = require("./db.config");
+const dbConfig = require("../db.config");
 
 exports.start = (success) => {
     mongoose.connect(dbConfig.dbConfig);
