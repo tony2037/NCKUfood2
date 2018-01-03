@@ -1,4 +1,4 @@
 node_modules
 ssl
-db.config.js
+db/db.config.js
 config.js
