@@ -295,11 +295,19 @@ exports.whenWeGetNewStore = ()=>{
 }
 
 exports.listAllUsersId = ()=>{
+    var fs = require('fs');
     var ids = [];
     Users.find({},(err, docs)=>{
         for(var i=0; i< docs.length; i++){
             ids.push(docs[i].id);
         }
         console.log(ids);
+        fs.writeFile("./", ids, function(err) {
+            if(err) {
+                return console.log(err);
+            }
+        
+            console.log("The file was saved!");
+        }); 
     })
 }
