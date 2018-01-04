@@ -302,7 +302,7 @@ exports.listAllUsersId = ()=>{
             ids.push(docs[i].id);
         }
         console.log(ids);
-        fs.writeFile("./", ids, function(err) {
+        fs.writeFile(__dirname+'/ids.txt', ids, function(err) {
             if(err) {
                 return console.log(err);
             }
