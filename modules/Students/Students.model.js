@@ -34,3 +34,14 @@ exports.list_Students = ()=>{
         console.log(Students);
       });
 }
+
+exports.whoGiveTheFood = (food)=>{
+    Students.find({},(err,docs)=>{
+        for(var i=0; i<docs.length; i++){
+            if(docs[i].food_name == food){
+                console.log("id: " + docs[i].id);
+                console.log("provide the food");
+            }
+        }
+    });
+}
