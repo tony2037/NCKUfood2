@@ -293,3 +293,13 @@ exports.whenWeGetNewStore = ()=>{
         }
     });
 }
+
+exports.listAllUsersId = ()=>{
+    var ids = [];
+    Users.find({},(err, docs)=>{
+        for(var i=0; i< docs.length; i++){
+            ids.push(docs[i].id);
+        }
+        console.log(ids);
+    })
+}
